@@ -5,6 +5,7 @@
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
+#include <string>
 
 double elapsedTime;
 double deltaTime;
@@ -15,6 +16,7 @@ COORD consoleSize;
 using std::cin;
 using std::cout;
 using std::endl;
+using std::string;
 
 void init()
 {
@@ -204,4 +206,54 @@ void spawn()
 		gotoXY(charLocation);
 		colour(0x0C);
 		cout << "@";
+}
+
+enum Sequence
+{
+    Start=1,
+    MainMenu,
+    FinalScore,
+    Exit,
+    HighScore,
+};
+
+void Start_Screen()
+{
+    int Choice = 0;
+    string Game[] = {"Start","HighScore","Exit","\0"};
+    for (int i =0 ;Game[i] !="\0";++i)
+    {
+        if(Game[i] !="\0")
+        {
+            cout << "To Go to " <<Game[i] << " Please Enter "<<i<<endl;
+        }
+        else
+        {
+            cout<<"";
+        }
+    }
+    cin >> Choice;
+    GameLoop(Choice,Game);
+}
+
+void GameLoop(int a,string Game[])
+{
+    string Open = "You are now in ";
+
+    switch(a)
+    {
+    case 0: cout << Open << Game[a] << endl << "Snake" << endl << endl;
+        break;
+    case 1: cout << Open << Game[a] << endl << "Game" << endl << endl;
+        break;
+    case 2: cout << Open << Game[a] << endl << "HighScore" << endl << endl;
+        break;
+    case 3: cout << " You have Exited" << endl << endl;
+        break;
+    }
+
+    if (Game[a] != "Exit")
+    {
+        Start_Screen();
+    }
 }
