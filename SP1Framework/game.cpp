@@ -78,11 +78,11 @@ void update(double dt)
 	{
 		do 
 		{
-		Beep(1440, 30);
-		charLocation.X--;
-		getInput();
-		update(g_timer.getElapsedTime());   // update the game
-        render();
+			Beep(1440, 30);
+			charLocation.X--;
+			getInput();
+			update(g_timer.getElapsedTime());   // update the game
+			render();
 		}
 
 		while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
@@ -118,47 +118,57 @@ void update(double dt)
 
 	/*if (keyPressed[K_UP] && charLocation.Y > 0)
 	{
-		do 
-		{
-			Beep(1440, 30);
-			charLocation.Y--;
-		}
-		while (!keyPressed[K_LEFT] || !keyPressed[K_RIGHT]);
+	do 
+	{
+	Beep(1440, 30);
+	charLocation.Y--;
+	}
+	while (!keyPressed[K_LEFT] || !keyPressed[K_RIGHT]);
 	}
 
 	if (keyPressed[K_LEFT] && charLocation.X > 0)
 	{
-		do 
-		{
-			Beep(1440, 30);
-			charLocation.X--;
-		}
-		while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
+	do 
+	{
+	Beep(1440, 30);
+	charLocation.X--;
+	}
+	while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
 	}
 
 	if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
 	{
-		do 
-		{
-			Beep(1440, 30);
-			charLocation.Y++;
-		}
-		while (!keyPressed[K_LEFT] || !keyPressed[K_RIGHT]);
+	do 
+	{
+	Beep(1440, 30);
+	charLocation.Y++;
+	}
+	while (!keyPressed[K_LEFT] || !keyPressed[K_RIGHT]);
 	}
 
 	if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
 	{
-		do 
-		{
-			Beep(1440, 30);
-			charLocation.X++;
-		}
-		while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
+	do 
+	{
+	Beep(1440, 30);
+	charLocation.X++;
+	}
+	while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
 	}*/
 
 	// quits the game if player hits the escape key
 	if (keyPressed[K_ESCAPE])
 		g_quitGame = true;    
+}
+
+void start()
+{
+	charLocation.X = consoleSize.X / 2;
+	charLocation.Y = consoleSize.Y / 2;
+	gotoXY(charLocation);
+	colour(0x0C);
+	colour(0x0C);
+	cout << (char)1;;
 }
 
 void render()
@@ -199,61 +209,79 @@ void render()
 
 void spawn()
 {
-		int xcoor = rand() % consoleSize.X + 1;
-		int ycoor = rand() % consoleSize.Y + 1;
-		charLocation.X = xcoor;
-		charLocation.Y = ycoor;
-		gotoXY(charLocation);
-		colour(0x0C);
-		cout << "@";
+	int xcoor = rand() % consoleSize.X + 1;
+	int ycoor = rand() % consoleSize.Y + 1;
+	charLocation.X = xcoor;
+	charLocation.Y = ycoor;
+	gotoXY(charLocation);
+	colour(0x0C);
+	cout << "@";
 }
 
-enum Sequence
+void gameLoop()
 {
-    Start=1,
-    MainMenu,
-    FinalScore,
-    Exit,
-    HighScore,
-};
+	int choice = 0;
+	string menu = "Welcome to the snake game!";
+	string load = "Please wait while the game loads! ";
+	string Intro = "This game has no introduction! -Nothing here- ";
+	string memorygame = "This is a game to test your memory!";
+	string End = "You lost!";
+	string exit = "Good bye! Hope you had fun!";
 
-void Start_Screen()
-{
-    int Choice = 0;
-    string Game[] = {"Start","HighScore","Exit","\0"};
-    for (int i =0 ;Game[i] !="\0";++i)
-    {
-        if(Game[i] !="\0")
-        {
-            cout << "To Go to " <<Game[i] << " Please Enter "<<i<<endl;
-        }
-        else
-        {
-            cout<<"";
-        }
-    }
-    cin >> Choice;
-    GameLoop(Choice,Game);
-}
+	Sequence game = MainMenu;
 
-void GameLoop(int a,string Game[])
-{
-    string Open = "You are now in ";
+	for (;game != Exit;)
+	{
+		switch (game)
+		{
+		case MainMenu: cout << menu << endl;
+			break;
+		case LoadingScreen: cout << load << endl;
+			break;
+		case Introduction: cout << Intro << endl;
+			break;
+		case Game:	start();
+					getInput();
+					update(g_timer.getElapsedTime());
+					break;
+		case EndGame: cout << End << endl;
+			break;
+		case Exit: cout << exit << endl;
+			break;
+		default: cout << load << endl;
+			break;
+		}
 
-    switch(a)
-    {
-    case 0: cout << Open << Game[a] << endl << "Snake" << endl << endl;
-        break;
-    case 1: cout << Open << Game[a] << endl << "Game" << endl << endl;
-        break;
-    case 2: cout << Open << Game[a] << endl << "HighScore" << endl << endl;
-        break;
-    case 3: cout << " You have Exited" << endl << endl;
-        break;
-    }
+		cout << endl;
 
-    if (Game[a] != "Exit")
-    {
-        Start_Screen();
-    }
+		if ( game == MainMenu)
+		{
+			cout << "1 - Main Menu" << endl;
+			cout << "2 - Introduction" << endl;
+			cout << "3 - Play" << endl;
+			cout << "4 - Exit" << endl;
+
+			cout << endl;
+			cin >> choice;
+			cout << endl;
+		}
+
+		//game = LoadingScreen;
+		//cout << load << endl;
+
+		switch (choice)
+		{
+		case 1:	game = MainMenu;
+			break;
+		case 2: game = Introduction;
+			break;
+		case 3:	game = Game;
+			break;
+		case 4: game = Exit;
+			break;
+		default: game = MainMenu;
+			break;
+		}
+		cout << endl;
+	}
 }

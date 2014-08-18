@@ -16,11 +16,24 @@ enum Keys
     K_COUNT
 };
 
+enum Sequence
+{
+	MainMenu,
+	LoadingScreen,
+	Introduction,
+	Game,
+	EndGame,
+	Exit,
+	MAX_STATES
+};
+
 void init();                // initialize your variables, allocate memory, etc
 void getInput();            // get input from player
 void update(double dt);     // update the game and the state of the game
 void render();              // renders the current state of the game to the console
 void shutdown();            // do clean up, free memory
 void spawn();
+void gameLoop();
+void start();
 
 #endif // _GAME_H
