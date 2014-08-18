@@ -18,12 +18,11 @@ enum Keys
 
 enum Sequence
 {
-	MainMenu,
-	LoadingScreen,
-	Introduction,
-	Game,
-	EndGame,
-	Exit,
+	MAINMENU = 1,
+	INSTRUCT,
+	GAME,
+	HIGHSCORE,
+	EXIT,
 	MAX_STATES
 };
 
@@ -35,5 +34,11 @@ void shutdown();            // do clean up, free memory
 void spawn();
 void gameLoop();
 void start();
+void MainMenu();
+void instruction();
+void game();
+void Highscore();
+void quitGame();
+void waiteasy () {Sleep(15000);}
 
 #endif // _GAME_H

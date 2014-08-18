@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <Windows.h>
 
 double elapsedTime;
 double deltaTime;
@@ -17,6 +18,8 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
+
+int choice = 0; //Global interger for menu
 
 void init()
 {
@@ -163,6 +166,7 @@ void update(double dt)
 
 void start()
 {
+	cls();
 	charLocation.X = consoleSize.X / 2;
 	charLocation.Y = consoleSize.Y / 2;
 	gotoXY(charLocation);
@@ -207,6 +211,11 @@ void render()
 	cout << (char)1;
 }
 
+void end()
+{
+	g_quitGame = true;
+}
+
 void spawn()
 {
 	int xcoor = rand() % consoleSize.X + 1;
@@ -217,71 +226,100 @@ void spawn()
 	colour(0x0C);
 	cout << "@";
 }
+void MainMenu()
+{
+	cout << "1) - Main Menu" << endl;
+	cout << "2) - Introduction" << endl;
+	cout << "3) - Play" << endl;
+	cout << "4) - Highscore" << endl;
+	cout << "5) - Exit" << endl;
+	cout << "Please choose an option: ";
 
+	cin >> choice;
+	cout << endl;
+}
+void instruction()
+{
+	cout << "Instructions go here" << endl;
+	cout << "Input 1 to go back to main menu: ";
+	cin >> choice;
+	cout << endl;
+}
+void game()
+{
+	start();
+	do { waiteasy();}
+	while (
+	update(g_timer.getElapsedTime());
+}
+void Highscore()
+{
+	cout << "Highscores go here" << endl;
+	cout << "Input 1 to go back to main menu: ";
+	cin >> choice;
+	cout << endl;
+}
+void quitGame()
+{
+	cout << "Bye Bye" << endl;
+	g_quitGame = true;
+}
 void gameLoop()
 {
-	int choice = 0;
 	string menu = "Welcome to the snake game!";
 	string load = "Please wait while the game loads! ";
 	string Intro = "This game has no introduction! -Nothing here- ";
 	string memorygame = "This is a game to test your memory!";
 	string End = "You lost!";
 	string exit = "Good bye! Hope you had fun!";
-
-	Sequence game = MainMenu;
-
-	for (;game != Exit;)
+	bool check = true;
+	/*for (;game != Exit;)
 	{
-		switch (game)
-		{
-		case MainMenu: cout << menu << endl;
-			break;
-		case LoadingScreen: cout << load << endl;
-			break;
-		case Introduction: cout << Intro << endl;
-			break;
-		case Game:	start();
-					getInput();
-					update(g_timer.getElapsedTime());
-					break;
-		case EndGame: cout << End << endl;
-			break;
-		case Exit: cout << exit << endl;
-			break;
-		default: cout << load << endl;
-			break;
-		}
+	switch (game)
+	{
+	case MainMenu: cout << menu << endl;
+	break;
+	case LoadingScreen: cout << load << endl;
+	break;
+	case Introduction: cout << Intro << endl;
+	break;
+	case Game:	cls();
+	start();
+	getInput();
+	update(g_timer.getElapsedTime());
+	break;
+	case EndGame: cout << End << endl;
+	break;
+	case Exit: cout << exit << endl;
+	end();
+	break;
+	default: cout << load << endl;
+	break;
+	}*/
+	cout << "Welcome to SNAKE!" << endl; 
+	cout << "1) - Main Menu" << endl;
+	cout << "2) - Introduction" << endl;
+	cout << "3) - Play" << endl;
+	cout << "4) - Highscore" << endl;
+	cout << "5) - Exit" << endl;
+	cout << "Please choose an option: ";
+	cin >> choice;
+	cout << endl;
 
-		cout << endl;
-
-		if ( game == MainMenu)
-		{
-			cout << "1 - Main Menu" << endl;
-			cout << "2 - Introduction" << endl;
-			cout << "3 - Play" << endl;
-			cout << "4 - Exit" << endl;
-
-			cout << endl;
-			cin >> choice;
-			cout << endl;
-		}
-
-		//game = LoadingScreen;
-		//cout << load << endl;
-
+	while(check)
+	{
 		switch (choice)
 		{
-		case 1:	game = MainMenu;
+		case MAINMENU: MainMenu();
 			break;
-		case 2: game = Introduction;
+		case INSTRUCT: instruction();
 			break;
-		case 3:	game = Game;
+		case GAME: game();
 			break;
-		case 4: game = Exit;
+		case HIGHSCORE: Highscore();
 			break;
-		default: game = MainMenu;
+		case EXIT: quitGame(); check = false;
 			break;
 		}
-		cout << endl;
 	}
 }
