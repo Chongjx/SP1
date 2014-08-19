@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <string>
 #include <Windows.h>
+#include <vector>
 
 double elapsedTime;
 double deltaTime;
@@ -18,6 +19,10 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
+
+int move = 5;
+int prev = 0;
 
 void init()
 {
@@ -61,32 +66,53 @@ void update(double dt)
 	deltaTime = dt;
 	// Updating the location of the character based on the key press
 
-	Beep(1440, 30);
-	charLocation.Y--;
-
-	if (keyPressed[K_UP] && charLocation.Y > 1)
+	if (keyPressed[K_UP] && charLocation.Y > 1 && prev != 2 && move != 5)
 	{
-		Beep(1440, 30);
-		charLocation.Y--;
+		move = 1;
+		prev = move;
 	}
 
-	if (keyPressed[K_LEFT] && charLocation.X > 1)
+	else if (keyPressed[K_LEFT] && charLocation.X > 1  && prev != 4)
 	{
-		Beep(1440, 30);
-		charLocation.X--;
+		move = 3;
+		prev = move;
 	}
 
-	if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 2)
+	else if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 2 && prev != 1)
 	{
-		Beep(1440, 30);
-		charLocation.Y++;
+		move = 2;
+		prev = move;
 	}
 
-	if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 2)
+	else if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 2 && prev != 3)
 	{
-		Beep(1440, 30);
-		charLocation.X++;
+		move = 4;
+		prev = move;
 	}
+
+	else
+	{
+		switch(move)
+		{
+			case up: Beep(1440, 30);
+				charLocation.Y--;
+					break;
+			case down: Beep(1440, 30);
+				charLocation.Y++;
+					break;
+			case left: Beep(1440, 30);
+				charLocation.X--;
+					break;
+			case right: Beep(1440, 30);
+				charLocation.X++;
+					break;
+			case norm: Beep(1440, 30);
+				charLocation.Y++;
+					break;
+		}
+	}
+
+
 
 	// quits the game if player hits the escape key
 	if (keyPressed[K_ESCAPE])
@@ -127,20 +153,31 @@ void render()
 	gotoXY(charLocation);
 	colour(0x0C);
 	cout << (char)1;
+
 }
 
-void Boarder()
+void boarder()
 {
-	int map[30][100];
+	vector<vector<int> > map;
 
-	int xcoor = rand() % 100 + 1;
-	int ycoor = rand() % 30 + 1;
+	int height = consoleSize.Y;
+	int width = consoleSize.X;
 
-	for (int row = 0; row < 30; row++)
+	map.resize (height);
+
+	for (int i = 0; i < height; i++)
 	{
-		for (int col = 0; col < 100; col++)
+		map[i].resize (width);
+	}
+
+	int xcoor = rand() % (width-1) + 1;
+	int ycoor = rand() % (height-1) + 1;
+
+	for (int row = 0; row < height; row++)
+	{
+		for (int col = 0; col < width; col++)
 		{
-			if (row == 0 || col == 0 || col == 99 || row == 29)
+			if (row == 0 || col == 0 || col == width-1 || row == height-1)
 			{
 				map[row][col] = 1;
 			}
@@ -153,13 +190,13 @@ void Boarder()
 		}
 	}
 
-	for (int row = 0; row < 30; row++)
+	for (int row = 0; row < height; row++)
 	{
-		for (int col = 0; col < 100; col++)
+		for (int col = 0; col < width; col++)
 		{
 			if (map[row][col] == 1)
 			{
-				cout << "*";
+				cout << "1";
 			}
 
 			else if (map[row][col] == 0)
@@ -167,9 +204,9 @@ void Boarder()
 				cout << " ";
 			}
 
-			else
+			else if (map[row][col] == 2)
 			{
-				cout << "@";
+				cout << "2";
 			}
 		}
 	}

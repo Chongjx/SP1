@@ -33,7 +33,6 @@ int mainmenu()
 			cout << "INVALID KEY!" << endl;
 		}
 	}
-
 }
 
 void instruction()
