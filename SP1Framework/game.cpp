@@ -60,60 +60,32 @@ void update(double dt)
 	elapsedTime += dt;
 	deltaTime = dt;
 	// Updating the location of the character based on the key press
+
+	Beep(1440, 30);
+	charLocation.Y--;
+
 	if (keyPressed[K_UP] && charLocation.Y > 1)
 	{
-		do
-		{
-			Beep(1440, 30);
-			charLocation.Y--;
-			getInput();
-			update(g_timer.getElapsedTime());   // update the game
-			render();
-		}
-
-		while (!keyPressed[K_LEFT] || !keyPressed[K_RIGHT]);
+		Beep(1440, 30);
+		charLocation.Y--;
 	}
 
 	if (keyPressed[K_LEFT] && charLocation.X > 1)
 	{
-		do 
-		{
-			Beep(1440, 30);
-			charLocation.X--;
-			getInput();
-			update(g_timer.getElapsedTime());   // update the game
-			render();
-		}
-
-		while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
+		Beep(1440, 30);
+		charLocation.X--;
 	}
 
 	if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 2)
 	{
-		do
-		{
-			Beep(1440, 30);
-			charLocation.Y++;
-			getInput();
-			update(g_timer.getElapsedTime());   // update the game
-			render();
-		}
-
-		while (!keyPressed[K_LEFT] || !keyPressed[K_RIGHT]);
+		Beep(1440, 30);
+		charLocation.Y++;
 	}
 
 	if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 2)
 	{
-		do
-		{
-			Beep(1440, 30);
-			charLocation.X++;
-			getInput();
-			update(g_timer.getElapsedTime());   // update the game
-			render();
-		}
-
-		while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
+		Beep(1440, 30);
+		charLocation.X++;
 	}
 
 	// quits the game if player hits the escape key
@@ -157,32 +129,48 @@ void render()
 	cout << (char)1;
 }
 
-void spawn()
+void Boarder()
 {
-	int xcoor = rand() % consoleSize.X + 1;
-	int ycoor = rand() % consoleSize.Y + 1;
-	charLocation.X = xcoor;
-	charLocation.Y = ycoor;
-	gotoXY(charLocation);
-	colour(0x0C);
-	cout << "@";
-}
+	int map[30][100];
 
-void game()
-{
-	start();
-	charLocation.Y--;
-	getInput();
-	update(g_timer.getElapsedTime());
-}
+	int xcoor = rand() % 100 + 1;
+	int ycoor = rand() % 30 + 1;
 
-void start()
-{
-	cls();
-	charLocation.X = consoleSize.X / 2;
-	charLocation.Y = consoleSize.Y / 2;
-	gotoXY(charLocation);
-	colour(0x0C);
-	colour(0x0C);
-	cout << (char)1;
+	for (int row = 0; row < 30; row++)
+	{
+		for (int col = 0; col < 100; col++)
+		{
+			if (row == 0 || col == 0 || col == 99 || row == 29)
+			{
+				map[row][col] = 1;
+			}
+
+			else
+			{
+				map[row][col] = 0;
+				map[ycoor][xcoor] = 2;
+			}
+		}
+	}
+
+	for (int row = 0; row < 30; row++)
+	{
+		for (int col = 0; col < 100; col++)
+		{
+			if (map[row][col] == 1)
+			{
+				cout << "*";
+			}
+
+			else if (map[row][col] == 0)
+			{
+				cout << " ";
+			}
+
+			else
+			{
+				cout << "@";
+			}
+		}
+	}
 }

@@ -18,9 +18,9 @@ enum Keys
 
 enum Sequence
 {
-	MAINMENU = 1,
-	INSTRUCT,
+	MAINMENU,
 	GAME,
+	INSTRUCTION,
 	HIGHSCORE,
 	EXIT,
 	MAX_STATES
@@ -31,12 +31,12 @@ void getInput();            // get input from player
 void update(double dt);     // update the game and the state of the game
 void render();              // renders the current state of the game to the console
 void shutdown();            // do clean up, free memory
-void Start_Screen();
-void Boarder();
-void spawn();
-void gameLoop();
-void start();
-void mainmenu();
+void Boarder();				// border around the map using 2D array
+void spawn();				// random food spawn
+void gameLoop();			// The loop
+
+
+int mainmenu();
 void instruction();
 void game();
 void highscore();

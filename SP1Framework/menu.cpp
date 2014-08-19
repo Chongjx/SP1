@@ -8,38 +8,50 @@ using std::cout;
 using std::endl;
 using std::string;
 
-int choice = 0;
-
-void mainmenu()
+int mainmenu()
 {
-	cls();
-	cout << "1) - Main Menu" << endl;
-	cout << "2) - Instruction" << endl;
-	cout << "3) - Play" << endl;
-	cout << "4) - Highscore" << endl;
-	cout << "5) - Exit" << endl;
-	cout << "Please choose an option: ";
+	for (bool check = true; check != false;)
+	{
+		int choice = 0;
+		cls();
+		cout << "1) - Play" << endl;
+		cout << "2) - Instruction" << endl;
+		cout << "3) - Highscore" << endl;
+		cout << "4) - Exit" << endl;
+		cout << "Please choose an option: ";
 
-	cin >> choice;
-	cout << endl;
+		cin >> choice;
+
+		if ( choice >= 1 && choice <= 4)
+		{
+			check = false;
+			return choice;
+		}
+
+		else
+		{
+			cout << "INVALID KEY!" << endl;
+		}
+	}
+
 }
 
 void instruction()
 {
 	cls();
+	char option = 0;
 	cout << "Instructions go here" << endl;
-	cout << "Input 1 to go back to main menu: ";
-	cin >> choice;
-	cout << endl;
+	cout << "Press any key to return to the main menu!" << endl;
+	cin >> option;
 }
 
 void highscore()
 {
 	cls();
+	char option = 0;
 	cout << "Highscores go here" << endl;
-	cout << "Input 1 to go back to main menu: ";
-	cin >> choice;
-	cout << endl;
+	cout << "Press any key to return to the main menu!" << endl;
+	cin >> option;
 }
 
 void quitGame()
@@ -49,37 +61,30 @@ void quitGame()
 	g_quitGame = true;
 }
 
-void end()
-{
-	g_quitGame = true;
-}
-
 void gameLoop()
 {
-	string menu = "Welcome to the snake game!";
-	string load = "Please wait while the game loads! ";
-	string Intro = "This game has no introduction! -Nothing here- ";
-	string memorygame = "This is a game to test your memory!";
-	string End = "You lost!";
-	string exit = "Good bye! Hope you had fun!";
 	bool check = true;
 
-	mainmenu();
+	int choice = 0;
+	choice = mainmenu();
 
 	while(check)
 	{
 		switch (choice)
 		{
-		case MAINMENU: mainmenu();
-			break;
-		case INSTRUCT: instruction();
-			break;
 		case GAME: game();
+			choice = mainmenu();
+			break;
+		case INSTRUCTION: instruction();
+			choice = mainmenu();
 			break;
 		case HIGHSCORE: highscore();
+			choice = mainmenu();
 			break;
 		case EXIT: quitGame();
-				check = false;
+			check = false;
+			break;
+		default: mainmenu();
 			break;
 		}
 	}
