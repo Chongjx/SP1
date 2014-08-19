@@ -6,7 +6,7 @@
 StopWatch g_timer;            // Timer function to keep track of time and the frame rate
 bool g_quitGame = false;      // Set to true if you want to quit the game
 const unsigned char FPS = 5; // FPS of this game
-const unsigned int frameTime = 100 / FPS; // time for each frame
+const unsigned int frameTime = 250 / FPS; // time for each frame
 
 void mainLoop();
 
@@ -16,12 +16,6 @@ void mainLoop();
 int main()
 {
 	init();				// initialize your variables
-	for ( int i = 0; i < 20; i++)
-	{
-	boarder();
-	system("PAUSE");
-	}
-
 	while (!g_quitGame) // run this loop until user wants to quit 
 	{
 		gameLoop(); // runs the menu screen
@@ -35,7 +29,9 @@ int main()
 // at a specific frame rate
 void game()
 {
+	system("CLS");
 	g_timer.startTimer();	// Start timer to calculate how long it takes to render this frame
+	map();
 	while (true)      // run this loop until user wants to quit 
 	{
 		getInput();							// get keyboard input
