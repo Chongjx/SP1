@@ -65,8 +65,7 @@ void update(double dt)
 		do
 		{
 			Beep(1440, 30);
-			charLocation.Y--; 
-			render();
+			charLocation.Y--;
 			getInput();
 			update(g_timer.getElapsedTime());   // update the game
 			render();
@@ -116,46 +115,6 @@ void update(double dt)
 
 		while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
 	}
-
-	/*if (keyPressed[K_UP] && charLocation.Y > 0)
-	{
-	do 
-	{
-	Beep(1440, 30);
-	charLocation.Y--;
-	}
-	while (!keyPressed[K_LEFT] || !keyPressed[K_RIGHT]);
-	}
-
-	if (keyPressed[K_LEFT] && charLocation.X > 0)
-	{
-	do 
-	{
-	Beep(1440, 30);
-	charLocation.X--;
-	}
-	while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
-	}
-
-	if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
-	{
-	do 
-	{
-	Beep(1440, 30);
-	charLocation.Y++;
-	}
-	while (!keyPressed[K_LEFT] || !keyPressed[K_RIGHT]);
-	}
-
-	if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
-	{
-	do 
-	{
-	Beep(1440, 30);
-	charLocation.X++;
-	}
-	while (!keyPressed[K_UP] || !keyPressed[K_DOWN]);
-	}*/
 
 	// quits the game if player hits the escape key
 	if (keyPressed[K_ESCAPE])
@@ -225,5 +184,5 @@ void start()
 	gotoXY(charLocation);
 	colour(0x0C);
 	colour(0x0C);
-	cout << (char)1;;
+	cout << (char)1;
 }

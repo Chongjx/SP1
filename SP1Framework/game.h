@@ -36,10 +36,10 @@ void Boarder();
 void spawn();
 void gameLoop();
 void start();
-void MainMenu();
+void mainmenu();
 void instruction();
 void game();
-void Highscore();
+void highscore();
 void quitGame();
 
 #endif // _GAME_H
