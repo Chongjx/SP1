@@ -31,11 +31,8 @@ void getInput();            // get input from player
 void update(double dt);     // update the game and the state of the game
 void render();              // renders the current state of the game to the console
 void shutdown();            // do clean up, free memory
-<<<<<<< HEAD
 void Start_Screen();
-void GameLoop(int a, string game[]);
 void Boarder();
-=======
 void spawn();
 void gameLoop();
 void start();
@@ -44,7 +41,5 @@ void instruction();
 void game();
 void Highscore();
 void quitGame();
-void waiteasy () {Sleep(15000);}
->>>>>>> origin/master
 
 #endif // _GAME_H
