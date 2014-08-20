@@ -11,9 +11,18 @@ using std::string;
 int mainmenu()
 {
 	for (bool check = true; check != false;)
-	{
+    {
 		int choice = 0;
 		cls();
+cout <<     "                            ______                       __                        " << endl;
+cout <<     "                           /      \\                     |  \\                     " << endl;
+cout <<     "                          |  SSSSSS\\ _______    ______  | kk   __   ______        " << endl;
+cout <<     "                          | SS___\\SS|       \\  |      \\ | kk  /  \\ /      \\   " << endl;
+cout <<     "                           \\SS    \\ | nnnnnnn\\  \\aaaaaa\\| kk_/  kk|  eeeeee\\ " << endl;
+cout <<     "                           _\\SSSSSS\\| nn  | nn /      aa| kk   kk | ee    ee     " << endl;
+cout <<     "                          |  \\__| SS| nn  | nn|  aaaaaaa| kkkkkk\\ | eeeeeeee     " << endl;
+cout <<     "                           \\SS    SS| nn  | nn \\aa    aa| kk  \\kk\\ \\ee     \\ " << endl;
+cout <<     "                            \\SSSSSS  \\nn   \\nn  \\aaaaaaa \\kk   \\kk  \\eeeeeee" << endl;
 		cout << "1) - Play" << endl;
 		cout << "2) - Instruction" << endl;
 		cout << "3) - Highscore" << endl;
