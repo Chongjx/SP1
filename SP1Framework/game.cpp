@@ -98,19 +98,19 @@ void update(double dt)
 		switch(move)
 		{
 		case up: Beep(1440, 30);
-			head.Y--;
+			snakeY[0]--;
 			break;
 		case down: Beep(1440, 30);
-			head.Y++;
+			snakeY[0]++;
 			break;
 		case left: Beep(1440, 30);
-			head.X--;
+			snakeX[0]--;
 			break;
 		case right: Beep(1440, 30);
-			head.X++;
+			snakeX[0]++;
 			break;
 		case norm: Beep(1440, 30);
-			head.Y++;
+			snakeX[0]++;
 			break;
 		}
 	}
@@ -155,8 +155,8 @@ void render()
 	cout << (char)1;*/
 	HANDLE hOut;
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	position.X = head.X;
-	position.Y = head.Y;
+	position.X = 0;
+	position.Y = 0;
 	SetConsoleCursorPosition (hOut, position);
 }
 
