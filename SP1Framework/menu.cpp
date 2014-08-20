@@ -51,17 +51,19 @@ void instruction()
 {
 	cls();
 	char option = 0;
-	cout << "                          _           _                   _   _                  " << endl;
-    cout << "                         (_)_ __  ___| |_ _ __ _   _  ___| |_(_) ___  _ __  ___  " << endl;
-    cout << "                         | | '_ \\/ __| __| '__| | | |/ __| __| |/ _ \\| '_ \\/ __| " << endl;
-    cout << "                         | | | | \\__ \\ |_| |  | |_| | (__| |_| | (_) | | | \\__ \\ " << endl;
-    cout << "                         |_|_| |_|___/\\__|_|   \\__,_|\\___|\\__|_|\\___/|_| |_|___/ " << endl << endl;
-    cout << "                                               How to play?" << endl << endl;
-    cout << "                         Use the arrow keys to direct the movement of the snake."<< endl; 
-    cout << "                     Eat more food produced randomly in the map to progress further."<< endl;
-    cout << "                         The game gets more challenging as the snake gets longer."<< endl; 
-    cout << "               However,the snake will die if it touches its own body or touches the walls."<< endl << endl;
-    cout << "                                Press any key to return to the main menu!" << endl;
+    cout << endl << endl << endl << endl << endl;
+	cout << "                        _           _                   _   _                  " << endl;
+    cout << "                       (_)_ __  ___| |_ _ __ _   _  ___| |_(_) ___  _ __  ___  " << endl;
+    cout << "                       | | '_ \\/ __| __| '__| | | |/ __| __| |/ _ \\| '_ \\/ __| " << endl;
+    cout << "                       | | | | \\__ \\ |_| |  | |_| | (__| |_| | (_) | | | \\__ \\ " << endl;
+    cout << "                       |_|_| |_|___/\\__|_|   \\__,_|\\___|\\__|_|\\___/|_| |_|___/ " << endl << endl;
+    cout << "                                             How to play?" << endl << endl;
+    cout << "                       Use the arrow keys to direct the movement of the snake."<< endl; 
+    cout << "                   Eat more food produced randomly in the map to progress further."<< endl;
+    cout << "                       The game gets more challenging as the snake gets longer."<< endl; 
+    cout << "             However,the snake will die if it touches its own body or touches the walls."<< endl << endl;
+    cout << "                              Press any key to return to the main menu!" << endl;
+    cout << "                                                  ";
 	cin >> option;
 }
 
@@ -69,30 +71,33 @@ void highscore()
 {
 	cls();
 	char option = 0;
-	cout <<    "        o      O ooOoOOo  .oOOOo.  o      O .oOOOo.   .oOOOo.   .oOOOo.  `OooOOo.  o.OOoOoo " << endl;
-    cout <<    "        O      o    O    .O     o  O      o o     o  .O     o  .O     o.  o     `o  O       " << endl;
-    cout <<    "        o      O    o    o         o      O O.       o         O       o  O      O  o       " << endl;
-    cout <<    "        OoOooOOo    O    O         OoOooOOo  `OOoo.  o         o       O  o     .O  ooOO    " << endl;
-    cout <<    "        o      O    o    O   .oOOo o      O       `O o         O       o  OOooOO'   O       " << endl;
-    cout <<    "        O      o    O    o.      O O      o        o O         o       O  o    o    o       " << endl;
-    cout <<    "        o      o    O     O.    oO o      o O.    .O `o     .o `o     O'  O     O   O       " << endl;
-    cout <<    "        o      O ooOOoOo   `OooO'  o      O  `oooO'   `OoooO'   `OoooO'   O      o ooOooOoO " << endl;
-	cout <<    "                           Press any key to return to the main menu!" << endl;
+    cout <<	   "                         _   _ ___ ____ _   _ ____   ____ ___  ____  _____ " << endl;
+    cout <<    "                        | | | |_ _/ ___| | | / ___| / ___/ _ \\|  _ \\| ____|" << endl;
+    cout <<    "                        | |_| || | |  _| |_| \\___ \\| |  | | | | |_) |  _|  " << endl;
+    cout <<    "                        |  _  || | |_| |  _  |___) | |__| |_| |  _ <| |___ " << endl;
+    cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl << endl << endl;
+	cout <<    "                              Press any key to return to the main menu!" << endl;
+    cout <<    "                                                ";
 	cin >> option;
 }
 
 void quitGame()
 {
 	cls();
-	cout << endl << endl << endl << endl << endl << endl << endl << endl << endl;
-    cout << "             .oOOOo.   .oOOOo.   .oOOOo.  o.OOOo.         o.oOOOo.  o       O  ooOOoOoo" << endl;
-    cout << "            .O     o  .O     o. .O     o.  O    `o         o     o  O       o  O       " << endl;
-    cout << "            o         O       o O       o  o      O        O     O  `o     O'  o       " << endl;
-    cout << "            O         o       O o       O  O      o        oOooOO.    O   o    ooOO    " << endl;
-    cout << "            O   .oOOo O       o O       o  o      O        o     `O    `O'     O       " << endl;
-    cout << "            o.      O o       O o       O  O      o        O      o     o      o       " << endl;
-    cout << "             O.    oO `o     O' `o     O'  o    .O'        o     .O     O      O       " << endl;
-    cout << "              `OooO'   `OoooO'   `OoooO'   OooOO'          `OooOO'      O      ooOooOoO" << endl << endl << endl << endl << endl;
+	cout << endl << endl << endl << endl << endl << endl;
+    cout << "                          _____ _   _    _    _   _ _  __ __   _____  _   _ " << endl;
+    cout << "                         |_   _| | | |  / \\  | \\ | | |/ / \\ \\ / / _ \\| | | |" << endl;
+    cout << "                           | | | |_| | / _ \\ |  \\| | ' /   \\ V / | | | | | |" << endl;
+    cout << "                           | | |  _  |/ ___ \\| |\\  | . \\    | || |_| | |_| |" << endl;
+    cout << "                           |_| |_| |_/_/   \\_\\_| \\_|_|\\_\\__ |_| \\___/ \\___/ " << endl;
+    cout << "                                            / \\  | \\ | |  _ \\                " << endl;
+    cout << "                                           / _ \\ |  \\| | | | |               " << endl;
+    cout << "                                          / ___ \\| |\\  | |_| |               " << endl;
+    cout << "                                ____  ___/_/___\\_\\_|_\\_|____/__   _______    " << endl;
+    cout << "                              / ___|/ _ \\ / _ \\|  _ \\  | __ ) \\ / / ____|   " << endl;
+    cout << "                             | |  _| | | | | | | | | | |  _ \\\\ V /|  _|     " << endl;
+    cout << "                             | |_| | |_| | |_| | |_| | | |_) || | | |___    " << endl;
+    cout << "                              \\____|\\___/ \\___/|____/  |____/ |_| |_____|   " << endl;
     cout << "                                    ";
 	g_quitGame = true;
 }
