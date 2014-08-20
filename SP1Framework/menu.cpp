@@ -25,7 +25,9 @@ int mainmenu()
         cout <<     "                       *  \\SS    SS| nn  | nn \\aa    aa| kk  \\kk\\ \\ee     \\ *" << endl;
         cout <<     "                       *   \\SSSSSS  \\nn   \\nn  \\aaaaaaa \\kk   \\kk  \\eeeeeee *" << endl; 
         cout <<     "                       *                                                    *" << endl;
-        cout <<     "                       ******************************************************" << endl << endl;
+        cout <<     "                       ******************************************************" << endl;
+		cout << endl;
+		cout << endl;
 		cout <<     "                                         1) - Play" << endl;
 		cout <<     "                                         2) - Instruction" << endl;
 		cout <<     "                                         3) - Highscore" << endl;
@@ -99,6 +101,7 @@ void quitGame()
     cout << "                             | |_| | |_| | |_| | |_| | | |_) || | | |___    " << endl;
     cout << "                              \\____|\\___/ \\___/|____/  |____/ |_| |_____|   " << endl;
     cout << "                                    ";
+	cout << endl;
 	g_quitGame = true;
 }
 

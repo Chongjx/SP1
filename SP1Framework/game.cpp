@@ -62,32 +62,32 @@ void getInput()
 	keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 }
 
-void update(double dt)
+/*void update(double dt)
 {
 	// get the delta time
 	elapsedTime += dt;
 	deltaTime = dt;
 	// Updating the location of the character based on the key press
 
-	if (keyPressed[K_UP] && snakeY[] > 1 && prev != 2 && move != 5)
+	if (keyPressed[K_UP] && prev != 2 && move != 5)
 	{
 		move = 1;
 		prev = move;
 	}
 
-	else if (keyPressed[K_LEFT] && snakeX[] > 1  && prev != 4)
+	else if (keyPressed[K_LEFT] && prev != 4)
 	{
 		move = 3;
 		prev = move;
 	}
 
-	else if (keyPressed[K_DOWN] && snakeY[] < consoleSize.Y - 2 && prev != 1)
+	else if (keyPressed[K_DOWN] && prev != 1)
 	{
 		move = 2;
 		prev = move;
 	}
 
-	else if (keyPressed[K_RIGHT] && snakeX[] < consoleSize.X - 2 && prev != 3)
+	else if (keyPressed[K_RIGHT] && prev != 3)
 	{
 		move = 4;
 		prev = move;
@@ -118,7 +118,7 @@ void update(double dt)
 	// quits the game if player hits the escape key
 	if (keyPressed[K_ESCAPE])
 		g_quitGame = true;    
-}
+}*/
 
 void render()
 {
@@ -177,6 +177,7 @@ void map()
 			}
 		}
 	}
+
 	draw();
 }
 
@@ -213,8 +214,11 @@ void createsnake(int size, int snakeX[],int snakeY[])
 	}
 }
 
-void updatesnake(int &size, int tempX[], int tempY[], int snakeX[], int snakeY[])
+void updatesnake(double dt, int &size, int tempX[], int tempY[], int snakeX[], int snakeY[])
 {
+	elapsedTime += dt;
+	deltaTime = dt;
+
 	int count = 0;
 	vector<int> itemX, itemY;
 	int tailX;
@@ -239,4 +243,54 @@ void updatesnake(int &size, int tempX[], int tempY[], int snakeX[], int snakeY[]
 		snakeX[i] = tempX[i];
 		snakeY[i] = tempY[i];
 	}
+
+	if (keyPressed[K_UP] && prev != 2 && move != 5)
+	{
+		move = 1;
+		prev = move;
+	}
+
+	else if (keyPressed[K_LEFT] && prev != 4)
+	{
+		move = 3;
+		prev = move;
+	}
+
+	else if (keyPressed[K_DOWN] && prev != 1)
+	{
+		move = 2;
+		prev = move;
+	}
+
+	else if (keyPressed[K_RIGHT] && prev != 3)
+	{
+		move = 4;
+		prev = move;
+	}
+
+	else
+	{
+		switch(move)
+		{
+		case up: Beep(1440, 30);
+			snakeY[0]--;
+			break;
+		case down: Beep(1440, 30);
+			snakeY[0]++;
+			break;
+		case left: Beep(1440, 30);
+			snakeX[0]--;
+			break;
+		case right: Beep(1440, 30);
+			snakeX[0]++;
+			break;
+		case norm: Beep(1440, 30);
+			snakeX[0]++;
+			break;
+		}
+	}
+
+	// quits the game if player hits the escape key
+	if (keyPressed[K_ESCAPE])
+		g_quitGame = true;  
 }
