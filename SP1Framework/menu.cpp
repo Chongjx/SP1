@@ -77,6 +77,7 @@ void highscore()
     cout <<    "                        |  _  || | |_| |  _  |___) | |__| |_| |  _ <| |___ " << endl;
     cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl << endl << endl;
 	cout <<    "                              Press any key to return to the main menu!" << endl;
+    cout << endl;
     cout <<    "                                                ";
 	cin >> option;
 }
@@ -98,6 +99,7 @@ void quitGame()
     cout << "                             | |  _| | | | | | | | | | |  _ \\\\ V /|  _|     " << endl;
     cout << "                             | |_| | |_| | |_| | |_| | | |_) || | | |___    " << endl;
     cout << "                              \\____|\\___/ \\___/|____/  |____/ |_| |_____|   " << endl;
+    cout << endl;
     cout << "                                    ";
 	g_quitGame = true;
 }
