@@ -45,6 +45,7 @@ void map();					// border around the map using 2D array
 void spawn();				// random food spawn
 void gameLoop();			// The loop
 void draw();
+void hiscore(int);
 
 int mainmenu();
 void instruction();

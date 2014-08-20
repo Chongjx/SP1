@@ -77,7 +77,9 @@ void highscore()
     cout <<    "                        | | | |_ _/ ___| | | / ___| / ___/ _ \\|  _ \\| ____|" << endl;
     cout <<    "                        | |_| || | |  _| |_| \\___ \\| |  | | | | |_) |  _|  " << endl;
     cout <<    "                        |  _  || | |_| |  _  |___) | |__| |_| |  _ <| |___ " << endl;
-    cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl << endl << endl;
+    cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl;
+	cout << endl;
+	hiscore(0);
 	cout <<    "                              Press any key to return to the main menu!" << endl;
     cout <<    "                                                ";
 	cin >> option;
