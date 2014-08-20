@@ -32,8 +32,7 @@ int mainmenu()
 		cout <<     "                                         2) - Instruction" << endl;
 		cout <<     "                                         3) - Highscore" << endl;
 		cout <<     "                                         4) - Exit" << endl << endl;
-		cout <<     "                                         Please choose an option: ";
-
+		cout <<     "                                    Please enter an option: ";
 		cin >> choice;
 
 		if ( choice >= 1 && choice <= 4)
