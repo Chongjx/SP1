@@ -117,7 +117,7 @@ void instruction()
     cout << "                   Eat more food produced randomly in the map to progress further."<< endl;
     cout << "                       The game gets more challenging as the snake gets longer."<< endl; 
     cout << "             However,the snake will die if it touches its own body or touches the walls."<< endl << endl;
-    cout << "                              Press any key to return to the main menu!" << endl;
+    cout << "                       Press UP or Down arrow keys to return to the main menu!" << endl;
     if (GetAsyncKeyState(VK_ESCAPE))
     {
         mainmenu();
@@ -143,6 +143,7 @@ void quitGame()
     cout << "                              \\____|\\___/ \\___/|____/  |____/ |_| |_____|   " << endl;
     cout << endl;
     cout << endl;
+    cout << "                                      ";
     g_quitGame = true;
     exit(0);
 

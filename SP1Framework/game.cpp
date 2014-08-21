@@ -336,7 +336,7 @@ void highscore()
     cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl;
     cout << endl;
     hiscore(0);
-    cout <<    "                              Press any key to return to the main menu!" << endl;
+    cout <<    "                    Press the UP or Down arrow keys to return to the main menu!" << endl;
     cout << endl;
 	score = 0;
 	foodspawned = 0;
