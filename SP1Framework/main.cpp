@@ -6,7 +6,6 @@
 
 StopWatch g_timer;            // Timer function to keep track of time and the frame rate
 bool g_quitGame = false;      // Set to true if you want to quit the game
-bool gameover =false;
 const unsigned char FPS = 5; // FPS of this game
 const unsigned int frameTime = 750 / FPS; // time for each frame
 
@@ -31,8 +30,10 @@ int main()
 // at a specific frame rate
 void game()
 {
+	createsnake(3);
+	gameover = false;
 	cls();
-	draw();
+	map();
 	g_timer.startTimer();	// Start timer to calculate how long it takes to render this frame
 	while (!gameover)      // run this loop until user wants to quit 
 	{
@@ -41,4 +42,6 @@ void game()
 		render();							 // render the graphics output to screen
 		g_timer.waitUntil(frameTime);		 // Frame rate limiter. Limits each frame to a specified time in ms.      
 	}
+	gg();
+	highscore();
 }

@@ -19,8 +19,7 @@ void colour(WORD attrib)
 	// Tell the user how to stop
 	//SetConsoleTextAttribute( hstdout, 0xEC );
 	
-	SetConsoleTextAttribute( hstdout, attrib );
-		
+	SetConsoleTextAttribute( hstdout, attrib );	
 }
 
 /* Standard error macro for reporting API errors */ 
