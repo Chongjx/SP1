@@ -328,20 +328,18 @@ void checkcollision()
 
 void highscore()
 {
-	cls();
-	char option = 0;
+    cls();
     cout <<	   "                         _   _ ___ ____ _   _ ____   ____ ___  ____  _____ " << endl;
     cout <<    "                        | | | |_ _/ ___| | | / ___| / ___/ _ \\|  _ \\| ____|" << endl;
     cout <<    "                        | |_| || | |  _| |_| \\___ \\| |  | | | | |_) |  _|  " << endl;
     cout <<    "                        |  _  || | |_| |  _  |___) | |__| |_| |  _ <| |___ " << endl;
     cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl;
-	cout << endl;
-	hiscore(score);
-	cout <<    "                              Press any key to return to the main menu!" << endl;
-    cout <<    "                                                ";
+    cout << endl;
+    hiscore(0);
+    cout <<    "                    Press the UP or Down arrow keys to return to the main menu!" << endl;
+    cout << endl;
 	score = 0;
 	foodspawned = 0;
-	cin >> option;
 }
 
 void gg()

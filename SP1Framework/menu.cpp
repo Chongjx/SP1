@@ -8,52 +8,106 @@ using std::cout;
 using std::endl;
 using std::string;
 
-int mainmenu()
+void mainmenu()
 {
-	for (bool check = true; check != false;)
+    for (bool check = true; check != false;)
     {
-		int choice = 0;
-		cls();
-        cout <<     "                       ******************************************************" << endl;
-        cout <<     "                       *   ______                       __                  *" << endl;
-        cout <<     "                       *  /      \\                     |  \\                 *" << endl;
-        cout <<     "                       * |  SSSSSS\\ _______    ______  | kk   __   ______   *" << endl;
-        cout <<     "                       * | SS___\\SS|       \\  |      \\ | kk  /  \\ /      \\  *" << endl;
-        cout <<     "                       *  \\SS    \\ | nnnnnnn\\  \\aaaaaa\\| kk_/  kk|  eeeeee\\ *" << endl;
-        cout <<     "                       *  _\\SSSSSS\\| nn  | nn /      aa| kk   kk | ee    ee *" << endl;
-        cout <<     "                       * |  \\__| SS| nn  | nn|  aaaaaaa| kkkkkk\\ | eeeeeeee *" << endl;
-        cout <<     "                       *  \\SS    SS| nn  | nn \\aa    aa| kk  \\kk\\ \\ee     \\ *" << endl;
-        cout <<     "                       *   \\SSSSSS  \\nn   \\nn  \\aaaaaaa \\kk   \\kk  \\eeeeeee *" << endl; 
-        cout <<     "                       *                                                    *" << endl;
-        cout <<     "                       ******************************************************" << endl;
-		cout << endl;
-		cout << endl;
-		cout <<     "                                         1) - Play" << endl;
-		cout <<     "                                         2) - Instruction" << endl;
-		cout <<     "                                         3) - Highscore" << endl;
-		cout <<     "                                         4) - Exit" << endl << endl;
-		cout <<     "                                    Please enter an option: ";
-		cin >> choice;
+        string Menu[4] = {"Play" , "Instruction" , "Highscore" , "Exit"};
+        int choice = 0;
 
-		if ( choice >= 1 && choice <= 4)
-		{
-			check = false;
-			return choice;
-		}
+        while(true)
+        {
+            system("cls");
 
-		else
-		{
-			cout << "INVALID KEY!" << endl;
-		}
-	}
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+            cout <<     "                       ******************************************************" << endl;
+            cout <<     "                       *   ______                       __                  *" << endl;
+            cout <<     "                       *  /      \\                     |  \\                 *" << endl;
+            cout <<     "                       * |  SSSSSS\\ _______    ______  | kk   __   ______   *" << endl;
+            cout <<     "                       * | SS___\\SS|       \\  |      \\ | kk  /  \\ /      \\  *" << endl;
+            cout <<     "                       *  \\SS    \\ | nnnnnnn\\  \\aaaaaa\\| kk_/  kk|  eeeeee\\ *" << endl;
+            cout <<     "                       *  _\\SSSSSS\\| nn  | nn /      aa| kk   kk | ee    ee *" << endl;
+            cout <<     "                       * |  \\__| SS| nn  | nn|  aaaaaaa| kkkkkk\\ | eeeeeeee *" << endl;
+            cout <<     "                       *  \\SS    SS| nn  | nn \\aa    aa| kk  \\kk\\ \\ee     \\ *" << endl;
+            cout <<     "                       *   \\SSSSSS  \\nn   \\nn  \\aaaaaaa \\kk   \\kk  \\eeeeeee *" << endl; 
+            cout <<     "                       *                                                    *" << endl;
+            cout <<     "                       ******************************************************" << endl;
+
+
+            for (int i = 0; i < 4; ++i)
+            {
+                if (i == choice)
+                {
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+                    cout << Menu[i] << endl;
+                }
+                else
+                {
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+                    cout << Menu[i] << endl;
+                }
+            }
+
+            while(true)
+            {
+                if (GetAsyncKeyState(VK_UP) != 0)
+                {
+                    choice -= 1;
+                    if (choice == -1)
+                    {
+                        choice = 3;
+                    }
+                    break;
+                }
+
+                else if (GetAsyncKeyState(VK_DOWN) != 0)
+                {
+                    choice += 1;
+                    if (choice == 4)
+                    {
+                        choice = 0;
+                    }
+                    break;
+                }
+
+                else if (GetAsyncKeyState(VK_RETURN) != 0)
+                {
+                    switch(choice)
+                    {
+                    case 0:
+                        {
+                            game();
+                            Sleep(1000);
+                        } break;
+                    case 1:
+                        {
+                            instruction();
+                            Sleep (200);
+                        } break;
+                    case 2:
+                        {
+                            highscore();
+                            Sleep (200);
+                        } break;
+                    case 3:
+                        {
+                            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+                            quitGame();
+                            g_quitGame = true;
+                        } break;
+                    }
+                }
+            }
+            Sleep(150);
+        }
+    }
 }
 
 void instruction()
 {
-	cls();
-	char option = 0;
+    cls();
     cout << endl << endl << endl << endl << endl;
-	cout << "                        _           _                   _   _                  " << endl;
+    cout << "                        _           _                   _   _                  " << endl;
     cout << "                       (_)_ __  ___| |_ _ __ _   _  ___| |_(_) ___  _ __  ___  " << endl;
     cout << "                       | | '_ \\/ __| __| '__| | | |/ __| __| |/ _ \\| '_ \\/ __| " << endl;
     cout << "                       | | | | \\__ \\ |_| |  | |_| | (__| |_| | (_) | | | \\__ \\ " << endl;
@@ -63,15 +117,17 @@ void instruction()
     cout << "                   Eat more food produced randomly in the map to progress further."<< endl;
     cout << "                       The game gets more challenging as the snake gets longer."<< endl; 
     cout << "             However,the snake will die if it touches its own body or touches the walls."<< endl << endl;
-    cout << "                              Press any key to return to the main menu!" << endl;
-    cout << "                                                  ";
-	cin >> option;
+    cout << "                       Press UP or Down arrow keys to return to the main menu!" << endl;
+    if (GetAsyncKeyState(VK_ESCAPE))
+    {
+        mainmenu();
+    }
 }
 
 void quitGame()
 {
-	cls();
-	cout << endl << endl << endl << endl << endl << endl;
+    cls();
+    cout << endl << endl << endl << endl << endl << endl;
     cout << "                          _____ _   _    _    _   _ _  __ __   _____  _   _ " << endl;
     cout << "                         |_   _| | | |  / \\  | \\ | | |/ / \\ \\ / / _ \\| | | |" << endl;
     cout << "                           | | | |_| | / _ \\ |  \\| | ' /   \\ V / | | | | | |" << endl;
@@ -85,36 +141,33 @@ void quitGame()
     cout << "                             | |  _| | | | | | | | | | |  _ \\\\ V /|  _|     " << endl;
     cout << "                             | |_| | |_| | |_| | |_| | | |_) || | | |___    " << endl;
     cout << "                              \\____|\\___/ \\___/|____/  |____/ |_| |_____|   " << endl;
-    cout << "                                    ";
-	cout << endl;
-	g_quitGame = true;
+    cout << endl;
+    cout << endl;
+    cout << "                                      ";
+    g_quitGame = true;
+    exit(0);
+
 }
 
 void gameLoop()
 {
-	bool check = true;
+    bool check = true;
 
-	int choice = 0;
-	choice = mainmenu();
-
-	while(check)
-	{
-		switch (choice)
-		{
-		case GAME: game();
-			choice = mainmenu();
-			break;
-		case INSTRUCTION: instruction();
-			choice = mainmenu();
-			break;
-		case HIGHSCORE: highscore();
-			choice = mainmenu();
-			break;
-		case EXIT: quitGame();
-			check = false;
-			break;
-		default: mainmenu();
-			break;
-		}
-	}
+    int choice = 0;
+    while(check)
+    {
+        switch (choice)
+        {
+        case GAME: game();
+            break;
+        case INSTRUCTION: instruction();
+            break;
+        case HIGHSCORE: highscore();
+            break;
+        case EXIT: quitGame();
+            break;
+        default: mainmenu();
+            break;
+        }
+    }
 }

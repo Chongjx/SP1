@@ -52,7 +52,7 @@ void gameLoop();				// The loop
 void hiscore(int);				// Highscore system
 void checkcollision();
 
-int mainmenu();					// Main menu screen
+void mainmenu();					// Main menu screen
 void instruction();				// Into the instruction for user
 void game();					// Into the game
 void highscore();				// Into the highscore
