@@ -46,11 +46,11 @@ void getInput();				// get input from player
 void update(double dt);			// update the game and the state of the game
 void render();					// renders the current state of the game to the console
 void shutdown();				// do clean up, free memory
-void map(int xcoor, int ycoor);	// border around the map using 2D array
+void map();						// border around the map using 2D array
 void spawn();					// random food spawn
 void gameLoop();				// The loop
-void draw();					// Display the map
 void hiscore(int);				// Highscore system
+void checkcollision();
 
 int mainmenu();					// Main menu screen
 void instruction();				// Into the instruction for user
@@ -58,6 +58,6 @@ void game();					// Into the game
 void highscore();				// Into the highscore
 void quitGame();				// Quit the game
 void createsnake(int size);		// Create my snake at the intial location
-int updatesnake();
+void updatesnake();
 
 #endif // _GAME_H

@@ -23,6 +23,7 @@ char level[Height][Width];
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
+bool gameover = false;
 COORD consoleSize;
 COORD position;
 COORD apple;
@@ -46,7 +47,7 @@ void init()
 	consoleSize.X = 100;
 	consoleSize.Y = 30;
 
-	createsnake(3);
+	createsnake(4);
 
 	elapsedTime = 0.0;
 
@@ -70,16 +71,13 @@ void getInput()
 
 void update(double dt)
 {
-	int snakesize = updatesnake();
-
-	// replace the previous last known coordinate of the snake with a space
-	gotoXY(body[snakesize-1].charLocation);
-	cout << ' ';
-
 	// get the delta time
 	elapsedTime += dt;
 	deltaTime = dt;
 	// Updating the location of the character based on the key press
+
+	gotoXY(body[body.size()-1].charLocation);
+	cout << ' ';
 
 	// if the player press up and the snake is not moving down, the snake will move up
 	if (keyPressed[K_UP] && prev != 2 && move != 5)
@@ -115,57 +113,58 @@ void update(double dt)
 		switch(move)
 		{
 		case up:
-			for (int i = 0; i < snakesize-1; i++)
+			for (int i = 0; i < body.size()-1; i++)
 			{
 				body[i+1].charLocation.X = body[i].charLocation.X;
 				body[i+1].charLocation.Y = body[i].charLocation.Y;
 			}
 			body[0].charLocation.Y--;
+			checkcollision();
 			break;
 
 		case down:
-			for (int i = 0; i < snakesize-1; i++)
+			for (int i = 0; i < body.size()-1; i++)
 			{
 				body[i+1].charLocation.X = body[i].charLocation.X;
 				body[i+1].charLocation.Y = body[i].charLocation.Y;
 			}
 			body[0].charLocation.Y++;
+			checkcollision();
 			break;
 
 		case left:
-			for (int i = 0; i < snakesize-1; i++)
+			for (int i = 0; i < body.size()-1; i++)
 			{
 				body[i+1].charLocation.X = body[i].charLocation.X;
 				body[i+1].charLocation.Y = body[i].charLocation.Y;
 			}
 			body[0].charLocation.X--;
+			checkcollision();
 			break;
 
 		case right:
-			for (int i = 0; i < snakesize-1; i++)
+			for (int i = 0; i < body.size()-1; i++)
 			{
 				body[i+1].charLocation.X = body[i].charLocation.X;
 				body[i+1].charLocation.Y = body[i].charLocation.Y;
 			}
 			body[0].charLocation.X++;
+			checkcollision();
 			break;
 
 		case norm:
-			for (int i = 0; i < snakesize-1 ; i++)
+			for (int i = 0; i < body.size()-1 ; i++)
 			{
 				body[i+1].charLocation.X = body[i].charLocation.X;
 				body[i+1].charLocation.Y = body[i].charLocation.Y;
 			}
 			body[0].charLocation.Y++;
+			checkcollision();
 			break;
 		}
 	}
 
-	// this will update the map where the snake is, for object collision.
-	for (int i = 0; i < snakesize; i++)
-	{	
-		map(body[i].charLocation.X, body[i].charLocation.Y);
-	}
+	updatesnake();
 
 	// quits the game if player hits the escape key
 	//if (keyPressed[K_ESCAPE])
@@ -215,34 +214,9 @@ void render()
 	SetConsoleCursorPosition (hOut, position);
 }
 
-void map(int xcoor, int ycoor)
+void map()
 {
 	// create a 2D array that will store the location of the snake and the food
-	for (int row = 0; row < Height; row++)
-	{
-		for (int col = 0; col < Width; col++)
-		{
-			if ( col == 0 || row == 0 || col == Width - 1 || row == Height - 1)
-			{
-				level[row][col] = 1;
-			}
-
-			else if ( row == ycoor && col == xcoor)
-			{
-				level[row][col] = 2;
-			}
-
-			else
-			{
-				level[row][col] = 0;
-			}
-		}
-	}
-}
-
-void draw()
-{
-	// Draws the map out
 	for (int row = 0; row < Height; row++)
 	{
 		for (int col = 0; col < Width; col++)
@@ -290,8 +264,7 @@ void spawn()
 		if ( apple.X == body[i].charLocation.X && apple.Y == body[i].charLocation.Y || apple.X == 0 || apple.Y == 0 || apple.X == Width - 1 || apple.Y == Height - 1)
 		{
 			apple.X = rand() % 99 + 1;
-			apple.Y = rand() % 29 + 1; 
-			break;
+			apple.Y = rand() % 29 + 1;
 		}
 	}
 
@@ -299,7 +272,7 @@ void spawn()
 	cout << '@';
 }
 
-int updatesnake()
+void updatesnake()
 {
 	bool foodeaten = false;
 
@@ -317,6 +290,20 @@ int updatesnake()
 		spawn();
 		foodspawned++;
 	}
+}
 
-	return body.size();
+void checkcollision()
+{
+	for ( int i = 1; i < body.size()-2; i++)
+	{
+		if (body[0].charLocation.X == body[i].charLocation.X && body[0].charLocation.Y == body[i].charLocation.Y)
+		{
+			gameover = true;
+		}
+	}
+
+	if (body[0].charLocation.X == 0 || body[0].charLocation.X == Width - 1 || body[0].charLocation.Y == 0 || body[0].charLocation.Y == Height - 1)
+	{
+		gameover = true;
+	}
 }

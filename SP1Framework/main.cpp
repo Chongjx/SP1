@@ -6,7 +6,6 @@
 
 StopWatch g_timer;            // Timer function to keep track of time and the frame rate
 bool g_quitGame = false;      // Set to true if you want to quit the game
-bool gameover =false;
 const unsigned char FPS = 5; // FPS of this game
 const unsigned int frameTime = 750 / FPS; // time for each frame
 
@@ -32,7 +31,7 @@ int main()
 void game()
 {
 	cls();
-	draw();
+	map();
 	g_timer.startTimer();	// Start timer to calculate how long it takes to render this frame
 	while (!gameover)      // run this loop until user wants to quit 
 	{
