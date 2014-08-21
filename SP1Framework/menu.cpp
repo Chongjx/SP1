@@ -39,12 +39,12 @@ void mainmenu()
                 if (i == choice)
                 {
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-                    cout << Menu[i] << endl;
+                    cout << "						" << Menu[i] << endl;
                 }
                 else
                 {
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
-                    cout << Menu[i] << endl;
+                    cout << "						" << Menu[i] << endl;
                 }
             }
 

@@ -110,61 +110,58 @@ void update(double dt)
 		prev = move;
 	}
 
-	else
+	// change the coordinates of the snake
+	switch(move)
 	{
-		// change the coordinates of the snake
-		switch(move)
+	case up:
+		for (int i = body.size()-1; i > 0 ; i--)
 		{
-		case up:
-			for (int i = body.size()-1; i > 0 ; i--)
-			{
-				body[i].charLocation.X = body[i-1].charLocation.X;
-				body[i].charLocation.Y = body[i-1].charLocation.Y;
-			}
-			body[0].charLocation.Y--;
-			checkcollision();
-			break;
-
-		case down:
-			for (int i = body.size()-1; i > 0 ; i--)
-			{
-				body[i].charLocation.X = body[i-1].charLocation.X;
-				body[i].charLocation.Y = body[i-1].charLocation.Y;
-			}
-			body[0].charLocation.Y++;
-			checkcollision();
-			break;
-
-		case left:
-			for (int i = body.size()-1; i > 0 ; i--)
-			{
-				body[i].charLocation.X = body[i-1].charLocation.X;
-				body[i].charLocation.Y = body[i-1].charLocation.Y;
-			}
-			body[0].charLocation.X--;
-			checkcollision();
-			break;
-
-		case right:
-			for (int i = body.size()-1; i > 0 ; i--)
-			{
-				body[i].charLocation.X = body[i-1].charLocation.X;
-				body[i].charLocation.Y = body[i-1].charLocation.Y;
-			}
-			body[0].charLocation.X++;
-			checkcollision();
-			break;
-
-		case norm:
-			for (int i = body.size()-1; i > 0 ; i--)
-			{
-				body[i].charLocation.X = body[i-1].charLocation.X;
-				body[i].charLocation.Y = body[i-1].charLocation.Y;
-			}
-			body[0].charLocation.Y++;
-			checkcollision();
-			break;
+			body[i].charLocation.X = body[i-1].charLocation.X;
+			body[i].charLocation.Y = body[i-1].charLocation.Y;
 		}
+		body[0].charLocation.Y--;
+		checkcollision();
+		break;
+
+	case down:
+		for (int i = body.size()-1; i > 0 ; i--)
+		{
+			body[i].charLocation.X = body[i-1].charLocation.X;
+			body[i].charLocation.Y = body[i-1].charLocation.Y;
+		}
+		body[0].charLocation.Y++;
+		checkcollision();
+		break;
+
+	case left:
+		for (int i = body.size()-1; i > 0 ; i--)
+		{
+			body[i].charLocation.X = body[i-1].charLocation.X;
+			body[i].charLocation.Y = body[i-1].charLocation.Y;
+		}
+		body[0].charLocation.X--;
+		checkcollision();
+		break;
+
+	case right:
+		for (int i = body.size()-1; i > 0 ; i--)
+		{
+			body[i].charLocation.X = body[i-1].charLocation.X;
+			body[i].charLocation.Y = body[i-1].charLocation.Y;
+		}
+		body[0].charLocation.X++;
+		checkcollision();
+		break;
+
+	case norm:
+		for (int i = body.size()-1; i > 0 ; i--)
+		{
+			body[i].charLocation.X = body[i-1].charLocation.X;
+			body[i].charLocation.Y = body[i-1].charLocation.Y;
+		}
+		body[0].charLocation.Y++;
+		checkcollision();
+		break;
 	}
 
 	// quits the game if player hits the escape key
