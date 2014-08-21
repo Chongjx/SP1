@@ -15,11 +15,20 @@ using std::endl;
 using std::string;
 using std::vector;
 
+#define Height 30
+#define Width 100
+
+char level[Height][Width];
+
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
-COORD head;
 COORD consoleSize;
+COORD position;
+COORD apple;
+int foodspawned = 0;
+
+vector<snake> body;
 
 int move = 5;
 int prev = 0;
@@ -34,14 +43,14 @@ void init()
 
 	/* get the number of character cells in the current buffer */ 
 	GetConsoleScreenBufferInfo( GetStdHandle( STD_OUTPUT_HANDLE ), &csbi );
-	consoleSize.X = csbi.srWindow.Right + 1;
-	consoleSize.Y = csbi.srWindow.Bottom + 1;
+	consoleSize.X = 100;
+	consoleSize.Y = 30;
 
-	// set the character to be in the center of the screen.
-	head.X = consoleSize.X / 2;
-	head.Y = consoleSize.Y / 4;
+	createsnake(3);
 
 	elapsedTime = 0.0;
+
+	colour(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
 }
 
 void shutdown()
@@ -61,30 +70,40 @@ void getInput()
 
 void update(double dt)
 {
+	int snakesize = updatesnake();
+
+	// replace the previous last known coordinate of the snake with a space
+	gotoXY(body[snakesize-1].charLocation);
+	cout << ' ';
+
 	// get the delta time
 	elapsedTime += dt;
 	deltaTime = dt;
 	// Updating the location of the character based on the key press
 
-	if (keyPressed[K_UP] && head.Y > 1 && prev != 2 && move != 5)
+	// if the player press up and the snake is not moving down, the snake will move up
+	if (keyPressed[K_UP] && prev != 2 && move != 5)
 	{
 		move = 1;
 		prev = move;
 	}
 
-	else if (keyPressed[K_LEFT] && head.X > 1  && prev != 4)
+	// if the player press left and the snake is not moving right, the snake will move left
+	else if (keyPressed[K_LEFT] && prev != 4)
 	{
 		move = 3;
 		prev = move;
 	}
 
-	else if (keyPressed[K_DOWN] && head.Y < consoleSize.Y - 2 && prev != 1)
+	// if the player press down and the snake is not moving up, the snake will move down
+	else if (keyPressed[K_DOWN] && prev != 1)
 	{
 		move = 2;
 		prev = move;
 	}
 
-	else if (keyPressed[K_RIGHT] && head.X < consoleSize.X - 2 && prev != 3)
+	// if the player press right and the snake is not moving left, the snake will move right
+	else if (keyPressed[K_RIGHT] && prev != 3)
 	{
 		move = 4;
 		prev = move;
@@ -92,49 +111,84 @@ void update(double dt)
 
 	else
 	{
+		// change the coordinates of the snake
 		switch(move)
 		{
-			case up: Beep(1440, 30);
-				head.Y--;
-					break;
-			case down: Beep(1440, 30);
-				head.Y++;
-					break;
-			case left: Beep(1440, 30);
-				head.X--;
-					break;
-			case right: Beep(1440, 30);
-				head.X++;
-					break;
-			case norm: Beep(1440, 30);
-				head.Y++;
-					break;
+		case up:
+			for (int i = 0; i < snakesize-1; i++)
+			{
+				body[i+1].charLocation.X = body[i].charLocation.X;
+				body[i+1].charLocation.Y = body[i].charLocation.Y;
+			}
+			body[0].charLocation.Y--;
+			break;
+
+		case down:
+			for (int i = 0; i < snakesize-1; i++)
+			{
+				body[i+1].charLocation.X = body[i].charLocation.X;
+				body[i+1].charLocation.Y = body[i].charLocation.Y;
+			}
+			body[0].charLocation.Y++;
+			break;
+
+		case left:
+			for (int i = 0; i < snakesize-1; i++)
+			{
+				body[i+1].charLocation.X = body[i].charLocation.X;
+				body[i+1].charLocation.Y = body[i].charLocation.Y;
+			}
+			body[0].charLocation.X--;
+			break;
+
+		case right:
+			for (int i = 0; i < snakesize-1; i++)
+			{
+				body[i+1].charLocation.X = body[i].charLocation.X;
+				body[i+1].charLocation.Y = body[i].charLocation.Y;
+			}
+			body[0].charLocation.X++;
+			break;
+
+		case norm:
+			for (int i = 0; i < snakesize-1 ; i++)
+			{
+				body[i+1].charLocation.X = body[i].charLocation.X;
+				body[i+1].charLocation.Y = body[i].charLocation.Y;
+			}
+			body[0].charLocation.Y++;
+			break;
 		}
 	}
 
+	// this will update the map where the snake is, for object collision.
+	for (int i = 0; i < snakesize; i++)
+	{	
+		map(body[i].charLocation.X, body[i].charLocation.Y);
+	}
+
 	// quits the game if player hits the escape key
-	if (keyPressed[K_ESCAPE])
-		g_quitGame = true;    
+	//if (keyPressed[K_ESCAPE])
+	//	g_quitGame = true;    
 }
 
 void render()
 {
-	// clear previous screen
 	colour(0x07);
 
 	//render the game
 
 	//render test screen code (not efficient at all)
 	/*const WORD colors[] =   {
-	                        0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
-	                        0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
-	                        };
+	0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
+	0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
+	};
 
 	for (int i = 0; i < 12; ++i)
 	{
-		gotoXY(3*i,i+1);
-		colour(colors[i]);
-		std::cout << "WOW";
+	gotoXY(3*i,i+1);
+	colour(colors[i]);
+	std::cout << "WOW";
 	}*/
 
 	// render time taken to calculate this frame
@@ -146,61 +200,123 @@ void render()
 	colour(0x59);
 	cout << elapsedTime << "secs" << endl;*/
 
-	// render character
-	gotoXY(head);
-	colour(0x07);
-	cout << (char)1;
-}
-
-void map()
-{
-	colour(0x07);
-	vector<vector<int> > map;
-
-	int height = consoleSize.Y;
-	int width = consoleSize.X;
-
-	map.resize (height);
-
-	for (int i = 0; i < height; i++)
+	// render the snake
+	for (int i = 0; i < body.size(); i++)
 	{
-		map[i].resize (width);
+		gotoXY(body[i].charLocation);
+		cout << 'O';
 	}
 
-	for (int row = 0; row < height; row++)
+	// set the cursor location at the top of the screen
+	HANDLE hOut;
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	position.X = 0;
+	position.Y = 0;
+	SetConsoleCursorPosition (hOut, position);
+}
+
+void map(int xcoor, int ycoor)
+{
+	// create a 2D array that will store the location of the snake and the food
+	for (int row = 0; row < Height; row++)
 	{
-		for (int col = 0; col < width; col++)
+		for (int col = 0; col < Width; col++)
 		{
-			if (row == 0 || col == 0 || col == width-1 || row == height-1)
+			if ( col == 0 || row == 0 || col == Width - 1 || row == Height - 1)
 			{
-				map[row][col] = 1;
+				level[row][col] = 1;
+			}
+
+			else if ( row == ycoor && col == xcoor)
+			{
+				level[row][col] = 2;
 			}
 
 			else
 			{
-				map[row][col] = 0;
-			}
-		}
-	}
-
-	for (int row = 0; row < height; row++)
-	{
-		for (int col = 0; col < width; col++)
-		{
-			if (map[row][col] == 1)
-			{
-				cout << "*";
-			}
-
-			else if (map[row][col] == 0)
-			{
-				cout << " ";
+				level[row][col] = 0;
 			}
 		}
 	}
 }
 
-/*void initialisesnake(body& bodypart, string username,int xsnake, int ysnake)
+void draw()
 {
+	// Draws the map out
+	for (int row = 0; row < Height; row++)
+	{
+		for (int col = 0; col < Width; col++)
+		{
+			if ( col == 0 || row == 0 || col == Width - 1 || row == Height - 1)
+			{
+				level[row][col] = '*';
+			}
 
-}*/
+			else
+			{
+				level[row][col] = ' ';
+			}
+		}
+	}
+
+	for (int row = 0; row < Height; row++)
+	{
+		for (int col = 0; col < Width; col++)
+		{
+			cout << level[row][col];
+		}
+	}
+}
+
+void createsnake(int size)
+{
+	// Create a snake at the center of the map
+	for (int i= 0; i < size; i++)
+	{
+		body.push_back(snake());
+
+		body[i].charLocation.X = consoleSize.X/2;
+		body[i].charLocation.Y = consoleSize.Y/2-i;
+	}
+}
+
+void spawn()
+{
+	apple.X = rand() % 99 + 1;
+	apple.Y = rand() % 29 + 1;
+
+	for ( int i = 0; i < body.size(); i++)
+	{
+		if ( apple.X == body[i].charLocation.X && apple.Y == body[i].charLocation.Y || apple.X == 0 || apple.Y == 0 || apple.X == Width - 1 || apple.Y == Height - 1)
+		{
+			apple.X = rand() % 99 + 1;
+			apple.Y = rand() % 29 + 1; 
+			break;
+		}
+	}
+
+	gotoXY (apple);
+	cout << '@';
+}
+
+int updatesnake()
+{
+	bool foodeaten = false;
+
+	if (body[0].charLocation.X == apple.X && body[0].charLocation.Y == apple.Y)
+	{
+		foodeaten = true;
+		foodspawned = 0;
+		body.push_back(snake());
+		body[body.size()-1].charLocation.X = apple.X;
+		body[body.size()-1].charLocation.Y = apple.Y;
+	}
+
+	if (foodeaten != true && foodspawned == 0)
+	{
+		spawn();
+		foodspawned++;
+	}
+
+	return body.size();
+}

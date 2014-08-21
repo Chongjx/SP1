@@ -5,6 +5,12 @@
 
 extern StopWatch g_timer;
 extern bool g_quitGame;
+extern bool gameover;
+
+struct snake
+{
+	COORD charLocation;
+};
 
 enum Keys
 {
@@ -35,27 +41,23 @@ enum Sequence
 	MAX_STATES
 };
 
-/*struct snake
-{
-	string playername;
-	vector<int> xpart;
-	vector<int> ypart;
-};*/
+void init();					// initialize your variables, allocate memory, etc
+void getInput();				// get input from player
+void update(double dt);			// update the game and the state of the game
+void render();					// renders the current state of the game to the console
+void shutdown();				// do clean up, free memory
+void map(int xcoor, int ycoor);	// border around the map using 2D array
+void spawn();					// random food spawn
+void gameLoop();				// The loop
+void draw();					// Display the map
+void hiscore(int);				// Highscore system
 
-void init();                // initialize your variables, allocate memory, etc
-void getInput();            // get input from player
-void update(double dt);     // update the game and the state of the game
-void render();              // renders the current state of the game to the console
-void shutdown();            // do clean up, free memory
-void map();				// border around the map using 2D array
-void spawn();				// random food spawn
-void gameLoop();			// The loop
-
-
-int mainmenu();
-void instruction();
-void game();
-void highscore();
-void quitGame();
+void mainmenu();					// Main menu screen
+void instruction();				// Into the instruction for user
+void game();					// Into the game
+void highscore();				// Into the highscore
+void quitGame();				// Quit the game
+void createsnake(int size);		// Create my snake at the intial location
+int updatesnake();
 
 #endif // _GAME_H
