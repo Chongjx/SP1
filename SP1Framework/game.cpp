@@ -293,6 +293,7 @@ void updatesnake()
 
 	if (body[0].charLocation.X == apple.X && body[0].charLocation.Y == apple.Y)
 	{
+		Beep (1440, 30);
 		foodeaten = true;
 		foodspawned = 0;
 		body.push_back(snake());
@@ -345,5 +346,6 @@ void highscore()
 
 void gg()
 {
+	prev = 0;
 	body.erase(body.begin(), body.begin()+body.size());
 }
