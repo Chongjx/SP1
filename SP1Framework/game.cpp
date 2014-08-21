@@ -271,7 +271,7 @@ void spawn()
 {
 	srand(time(0));
 	apple.X = rand() % 99 + 1;
-	apple.Y = rand() % 29 + 1;
+	apple.Y = rand() % 39 + 1;
 
 	for ( int i = 0; i < body.size(); i++)
 	{
