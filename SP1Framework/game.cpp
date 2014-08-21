@@ -8,6 +8,7 @@
 #include <string>
 #include <Windows.h>
 #include <vector>
+#include <ctime>
 
 using std::cin;
 using std::cout;
@@ -15,7 +16,7 @@ using std::endl;
 using std::string;
 using std::vector;
 
-#define Height 30
+#define Height 40
 #define Width 100
 
 char level[Height][Width];
@@ -27,7 +28,9 @@ bool gameover = false;
 COORD consoleSize;
 COORD position;
 COORD apple;
+COORD scoreplace;
 int foodspawned = 0;
+int score;
 
 vector<snake> body;
 
@@ -45,9 +48,7 @@ void init()
 	/* get the number of character cells in the current buffer */ 
 	GetConsoleScreenBufferInfo( GetStdHandle( STD_OUTPUT_HANDLE ), &csbi );
 	consoleSize.X = 100;
-	consoleSize.Y = 30;
-
-	createsnake(4);
+	consoleSize.Y = 40;
 
 	elapsedTime = 0.0;
 
@@ -76,8 +77,13 @@ void update(double dt)
 	deltaTime = dt;
 	// Updating the location of the character based on the key press
 
-	gotoXY(body[body.size()-1].charLocation);
-	cout << ' ';
+	for (int i = 0; i < body.size(); i++)
+	{
+		gotoXY(body[i].charLocation);
+		cout << ' ';
+	}
+
+	updatesnake();
 
 	// if the player press up and the snake is not moving down, the snake will move up
 	if (keyPressed[K_UP] && prev != 2 && move != 5)
@@ -113,58 +119,56 @@ void update(double dt)
 		switch(move)
 		{
 		case up:
-			for (int i = 0; i < body.size()-1; i++)
+			for (int i = body.size()-1; i > 0 ; i--)
 			{
-				body[i+1].charLocation.X = body[i].charLocation.X;
-				body[i+1].charLocation.Y = body[i].charLocation.Y;
+				body[i].charLocation.X = body[i-1].charLocation.X;
+				body[i].charLocation.Y = body[i-1].charLocation.Y;
 			}
 			body[0].charLocation.Y--;
 			checkcollision();
 			break;
 
 		case down:
-			for (int i = 0; i < body.size()-1; i++)
+			for (int i = body.size()-1; i > 0 ; i--)
 			{
-				body[i+1].charLocation.X = body[i].charLocation.X;
-				body[i+1].charLocation.Y = body[i].charLocation.Y;
+				body[i].charLocation.X = body[i-1].charLocation.X;
+				body[i].charLocation.Y = body[i-1].charLocation.Y;
 			}
 			body[0].charLocation.Y++;
 			checkcollision();
 			break;
 
 		case left:
-			for (int i = 0; i < body.size()-1; i++)
+			for (int i = body.size()-1; i > 0 ; i--)
 			{
-				body[i+1].charLocation.X = body[i].charLocation.X;
-				body[i+1].charLocation.Y = body[i].charLocation.Y;
+				body[i].charLocation.X = body[i-1].charLocation.X;
+				body[i].charLocation.Y = body[i-1].charLocation.Y;
 			}
 			body[0].charLocation.X--;
 			checkcollision();
 			break;
 
 		case right:
-			for (int i = 0; i < body.size()-1; i++)
+			for (int i = body.size()-1; i > 0 ; i--)
 			{
-				body[i+1].charLocation.X = body[i].charLocation.X;
-				body[i+1].charLocation.Y = body[i].charLocation.Y;
+				body[i].charLocation.X = body[i-1].charLocation.X;
+				body[i].charLocation.Y = body[i-1].charLocation.Y;
 			}
 			body[0].charLocation.X++;
 			checkcollision();
 			break;
 
 		case norm:
-			for (int i = 0; i < body.size()-1 ; i++)
+			for (int i = body.size()-1; i > 0 ; i--)
 			{
-				body[i+1].charLocation.X = body[i].charLocation.X;
-				body[i+1].charLocation.Y = body[i].charLocation.Y;
+				body[i].charLocation.X = body[i-1].charLocation.X;
+				body[i].charLocation.Y = body[i-1].charLocation.Y;
 			}
 			body[0].charLocation.Y++;
 			checkcollision();
 			break;
 		}
 	}
-
-	updatesnake();
 
 	// quits the game if player hits the escape key
 	//if (keyPressed[K_ESCAPE])
@@ -206,6 +210,9 @@ void render()
 		cout << 'O';
 	}
 
+	gotoXY(12, 40);
+	cout << score;
+
 	// set the cursor location at the top of the screen
 	HANDLE hOut;
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -240,22 +247,29 @@ void map()
 			cout << level[row][col];
 		}
 	}
+
+	scoreplace.X = 0;
+	scoreplace.Y = 46;
+
+	gotoXY(scoreplace);
+	cout << "Your score: ";
 }
 
 void createsnake(int size)
 {
 	// Create a snake at the center of the map
-	for (int i= 0; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		body.push_back(snake());
 
 		body[i].charLocation.X = consoleSize.X/2;
-		body[i].charLocation.Y = consoleSize.Y/2-i;
+		body[i].charLocation.Y = consoleSize.Y/4 - i;
 	}
 }
 
 void spawn()
 {
+	srand(time(0));
 	apple.X = rand() % 99 + 1;
 	apple.Y = rand() % 29 + 1;
 
@@ -264,11 +278,12 @@ void spawn()
 		if ( apple.X == body[i].charLocation.X && apple.Y == body[i].charLocation.Y || apple.X == 0 || apple.Y == 0 || apple.X == Width - 1 || apple.Y == Height - 1)
 		{
 			apple.X = rand() % 99 + 1;
-			apple.Y = rand() % 29 + 1;
+			apple.Y = rand() % 31 + 1;
 		}
 	}
 
 	gotoXY (apple);
+	colour(0x1);
 	cout << '@';
 }
 
@@ -281,8 +296,10 @@ void updatesnake()
 		foodeaten = true;
 		foodspawned = 0;
 		body.push_back(snake());
-		body[body.size()-1].charLocation.X = apple.X;
-		body[body.size()-1].charLocation.Y = apple.Y;
+
+		body[body.size()-1].charLocation.X = body[body.size()-2].charLocation.X;
+		body[body.size()-1].charLocation.Y = body[body.size()-2].charLocation.X;
+		score += 10;
 	}
 
 	if (foodeaten != true && foodspawned == 0)
@@ -294,7 +311,7 @@ void updatesnake()
 
 void checkcollision()
 {
-	for ( int i = 1; i < body.size()-2; i++)
+	for ( int i = 1; i < body.size(); i++)
 	{
 		if (body[0].charLocation.X == body[i].charLocation.X && body[0].charLocation.Y == body[i].charLocation.Y)
 		{
@@ -306,4 +323,27 @@ void checkcollision()
 	{
 		gameover = true;
 	}
+}
+
+void highscore()
+{
+	cls();
+	char option = 0;
+    cout <<	   "                         _   _ ___ ____ _   _ ____   ____ ___  ____  _____ " << endl;
+    cout <<    "                        | | | |_ _/ ___| | | / ___| / ___/ _ \\|  _ \\| ____|" << endl;
+    cout <<    "                        | |_| || | |  _| |_| \\___ \\| |  | | | | |_) |  _|  " << endl;
+    cout <<    "                        |  _  || | |_| |  _  |___) | |__| |_| |  _ <| |___ " << endl;
+    cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl;
+	cout << endl;
+	hiscore(score);
+	cout <<    "                              Press any key to return to the main menu!" << endl;
+    cout <<    "                                                ";
+	score = 0;
+	foodspawned = 0;
+	cin >> option;
+}
+
+void gg()
+{
+	body.erase(body.begin(), body.begin()+body.size());
 }

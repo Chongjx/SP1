@@ -59,5 +59,6 @@ void highscore();				// Into the highscore
 void quitGame();				// Quit the game
 void createsnake(int size);		// Create my snake at the intial location
 void updatesnake();
+void gg();
 
 #endif // _GAME_H

@@ -81,7 +81,7 @@ void hiscore(int playerscore)
 	while(!PrintScore.eof()) //
 	{
 		getline(PrintScore, data);
-		cout << data << endl;
+		cout << "						" << data << endl;
 	}
 	PrintScore.close();
 }
