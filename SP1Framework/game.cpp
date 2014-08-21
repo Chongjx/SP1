@@ -77,13 +77,10 @@ void update(double dt)
 	deltaTime = dt;
 	// Updating the location of the character based on the key press
 
-	for (int i = 0; i < body.size(); i++)
-	{
-		gotoXY(body[i].charLocation);
-		cout << ' ';
-	}
-
 	updatesnake();
+
+	gotoXY(body[body.size()-1].charLocation);
+	cout << ' ';
 
 	// if the player press up and the snake is not moving down, the snake will move up
 	if (keyPressed[K_UP] && prev != 2 && move != 5)
@@ -204,11 +201,8 @@ void render()
 	cout << elapsedTime << "secs" << endl;*/
 
 	// render the snake
-	for (int i = 0; i < body.size(); i++)
-	{
-		gotoXY(body[i].charLocation);
-		cout << 'O';
-	}
+	gotoXY(body[0].charLocation);
+	cout << 'O';
 
 	gotoXY(12, 40);
 	cout << score;
@@ -293,7 +287,7 @@ void updatesnake()
 
 	if (body[0].charLocation.X == apple.X && body[0].charLocation.Y == apple.Y)
 	{
-		Beep (1440, 30);
+		Beep (523, 100);
 		foodeaten = true;
 		foodspawned = 0;
 		body.push_back(snake());
@@ -328,16 +322,16 @@ void checkcollision()
 
 void highscore()
 {
-    cls();
-    cout <<	   "                         _   _ ___ ____ _   _ ____   ____ ___  ____  _____ " << endl;
-    cout <<    "                        | | | |_ _/ ___| | | / ___| / ___/ _ \\|  _ \\| ____|" << endl;
-    cout <<    "                        | |_| || | |  _| |_| \\___ \\| |  | | | | |_) |  _|  " << endl;
-    cout <<    "                        |  _  || | |_| |  _  |___) | |__| |_| |  _ <| |___ " << endl;
-    cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl;
-    cout << endl;
-    hiscore(0);
-    cout <<    "                    Press the UP or Down arrow keys to return to the main menu!" << endl;
-    cout << endl;
+	cls();
+	cout <<	   "                         _   _ ___ ____ _   _ ____   ____ ___  ____  _____ " << endl;
+	cout <<    "                        | | | |_ _/ ___| | | / ___| / ___/ _ \\|  _ \\| ____|" << endl;
+	cout <<    "                        | |_| || | |  _| |_| \\___ \\| |  | | | | |_) |  _|  " << endl;
+	cout <<    "                        |  _  || | |_| |  _  |___) | |__| |_| |  _ <| |___ " << endl;
+	cout <<    "                        |_| |_|___\\____|_| |_|____/ \\____\\___/|_| \\_\\_____|" << endl;
+	cout << endl;
+	hiscore(score);
+	cout <<    "                    Press the UP or Down arrow keys to return to the main menu!" << endl;
+	cout << endl;
 	score = 0;
 	foodspawned = 0;
 }
