@@ -335,6 +335,7 @@ void highscore()
 
 void gg()
 {
+	move = 5;
 	prev = 0;
 	body.erase(body.begin(), body.begin()+body.size());
 }
