@@ -329,8 +329,6 @@ void highscore()
 	hiscore(score);
 	cout <<    "                    Press the UP or Down arrow keys to return to the main menu!" << endl;
 	cout << endl;
-	score = 0;
-	foodspawned = 0;
 }
 
 void gg()
@@ -338,4 +336,7 @@ void gg()
 	move = 5;
 	prev = 0;
 	body.erase(body.begin(), body.begin()+body.size());
+	score = 0;
+	foodspawned = 0;
+	gameover = false;
 }
