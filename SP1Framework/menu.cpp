@@ -12,7 +12,7 @@ void mainmenu()
 {
     for (bool check = true; check != false;)
     {
-        string Menu[5] = {"Play" , "Instruction" , "Highscore" , "Options", "Exit"};
+        string Menu[4] = {"Play" , "Instruction" , "Highscore" , "Exit"};
         int choice = 0;
 
         while(true)
@@ -34,7 +34,7 @@ void mainmenu()
             cout <<     "                       ******************************************************" << endl;
 
 
-            for (int i = 0; i < 5; ++i)
+            for (int i = 0; i < 4; ++i)
             {
                 if (i == choice)
                 {
@@ -55,7 +55,7 @@ void mainmenu()
                     choice -= 1;
                     if (choice == -1)
                     {
-                        choice = 4;
+                        choice = 3;
                     }
                     break;
                 }
@@ -63,7 +63,7 @@ void mainmenu()
                 else if (GetAsyncKeyState(VK_DOWN) != 0)
                 {
                     choice += 1;
-                    if (choice == 5)
+                    if (choice == 4)
                     {
                         choice = 0;
                     }
@@ -89,12 +89,7 @@ void mainmenu()
                             highscore();
                             Sleep (200);
                         } break;
-					case 3:
-						{
-							options();
-							Sleep(200);
-						} break;
-                    case 4:
+                    case 3:
                         {
                             colour(0x02);
                             quitGame();
@@ -148,11 +143,4 @@ void quitGame()
     g_quitGame = true;
     exit(0);
 
-}
-
-void options()
-{
-	cls();
-	colourOptions();
-	cout << "                            Press UP arrow key to return to the main menu!" << endl;
 }

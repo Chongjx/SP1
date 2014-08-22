@@ -32,7 +32,6 @@ COORD scoreplace;
 int foodspawned = 0;
 int score;
 int current = 0;
-WORD chosencolour[] = {0x7};
 
 vector<snake> body;
 //vector<snake2> body2;
@@ -299,7 +298,7 @@ break;
 
 void render()
 {
-	colour(chosencolour[0]);
+	colour(0x07);
 
 	//render the game
 
@@ -587,6 +586,7 @@ void gg()
 	foodspawned = 0;
 	gameover = false;
 	current = 0;
+<<<<<<< HEAD
 }
 
 void colourOptions()
@@ -629,3 +629,6 @@ score = 0;
 foodspawned = 0;
 gameover = false;
 }*/
+=======
+}
+>>>>>>> parent of 1613fae... colour
