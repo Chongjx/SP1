@@ -118,10 +118,6 @@ void instruction()
     cout << "                       The game gets more challenging as the snake gets longer."<< endl; 
     cout << "             However,the snake will die if it touches its own body or touches the walls."<< endl << endl;
     cout << "                       Press UP or Down arrow keys to return to the main menu!" << endl;
-    if (GetAsyncKeyState(VK_ESCAPE))
-    {
-        mainmenu();
-    }
 }
 
 void quitGame()

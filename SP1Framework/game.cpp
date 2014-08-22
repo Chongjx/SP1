@@ -319,6 +319,7 @@ void checkcollision()
 
 void highscore()
 {
+    colour(0x02);
 	cls();
 	cout <<	   "                         _   _ ___ ____ _   _ ____   ____ ___  ____  _____ " << endl;
 	cout <<    "                        | | | |_ _/ ___| | | / ___| / ___/ _ \\|  _ \\| ____|" << endl;
