@@ -31,6 +31,7 @@ COORD apple;
 COORD scoreplace;
 int foodspawned = 0;
 int score;
+int current = 0;
 
 vector<snake> body;
 
@@ -70,14 +71,12 @@ void getInput()
 	keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 }
 
-void update(double dt)
+int update(double dt)
 {
 	// get the delta time
 	elapsedTime += dt;
 	deltaTime = dt;
 	// Updating the location of the character based on the key press
-
-	updatesnake();
 
 	gotoXY(body[body.size()-1].charLocation);
 	cout << ' ';
@@ -164,9 +163,27 @@ void update(double dt)
 		break;
 	}
 
-	// quits the game if player hits the escape key
-	//if (keyPressed[K_ESCAPE])
-	//	g_quitGame = true;    
+	current = updatesnake();
+
+	if (current <= 100)
+	{
+		return 500;
+	}
+
+	else if (current <= 200)
+	{
+		return 400;
+	}
+
+	else if ( current <= 400)
+	{
+		return 200;
+	}
+
+	else if ( current > 500)
+	{
+		return 100;
+	}
 }
 
 void render()
@@ -278,7 +295,7 @@ void spawn()
 	cout << '@';
 }
 
-void updatesnake()
+int updatesnake()
 {
 	bool foodeaten = false;
 
@@ -299,6 +316,8 @@ void updatesnake()
 		spawn();
 		foodspawned++;
 	}
+
+	return score;
 }
 
 void checkcollision()
@@ -340,4 +359,5 @@ void gg()
 	score = 0;
 	foodspawned = 0;
 	gameover = false;
+	current = 0;
 }

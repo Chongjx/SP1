@@ -7,7 +7,6 @@
 StopWatch g_timer;            // Timer function to keep track of time and the frame rate
 bool g_quitGame = false;      // Set to true if you want to quit the game
 const unsigned char FPS = 5; // FPS of this game
-const unsigned int frameTime = 200 / FPS; // time for each frame
 
 void mainLoop();
 
@@ -30,6 +29,7 @@ int main()
 // at a specific frame rate
 void game()
 {
+	int current = 500;
 	createsnake(3);
 	cls();
 	map();
@@ -37,9 +37,9 @@ void game()
 	while (!gameover)      // run this loop until user wants to quit 
 	{
 		getInput();							// get keyboard input
-		update(g_timer.getElapsedTime());	// update the game
+		current = update(g_timer.getElapsedTime());	// update the game
 		render();							 // render the graphics output to screen
-		g_timer.waitUntil(frameTime);		 // Frame rate limiter. Limits each frame to a specified time in ms.      
+		g_timer.waitUntil(current/FPS);		 // Frame rate limiter. Limits each frame to a specified time in ms.      
 	}
 	highscore();
 	gg();

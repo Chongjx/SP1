@@ -43,7 +43,7 @@ enum Sequence
 
 void init();					// initialize your variables, allocate memory, etc
 void getInput();				// get input from player
-void update(double dt);			// update the game and the state of the game
+int update(double dt);			// update the game and the state of the game
 void render();					// renders the current state of the game to the console
 void shutdown();				// do clean up, free memory
 void map();						// border around the map using 2D array
@@ -58,7 +58,7 @@ void game();					// Into the game
 void highscore();				// Into the highscore
 void quitGame();				// Quit the game
 void createsnake(int size);		// Create my snake at the intial location
-void updatesnake();
+int updatesnake();
 void gg();
 
 #endif // _GAME_H
