@@ -25,9 +25,6 @@ void hiscore(int playerscore)
 	string data;
 	int z = 0;
 
-	cout << "					Your score is : " << playerscore << endl;
-	cout << endl;
-
 	PrintScore.open ("Highscore.txt");
 
 	for(int q = 0; q < 5; q++)
