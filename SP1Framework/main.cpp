@@ -31,16 +31,27 @@ void game()
 {
 	int current = 500;
 	createsnake(3);
+    //createsnake2(3);
 	cls();
 	map();
 	g_timer.startTimer();	// Start timer to calculate how long it takes to render this frame
 	while (!gameover)      // run this loop until user wants to quit 
 	{
 		getInput();							// get keyboard input
+<<<<<<< Updated upstream
 		current = update(g_timer.getElapsedTime());	// update the game
 		render();							 // render the graphics output to screen
 		g_timer.waitUntil(current/FPS);		 // Frame rate limiter. Limits each frame to a specified time in ms.      
+=======
+        //getInput2();
+		update(g_timer.getElapsedTime());	// update the game
+        //update2(g_timer.getElapsedTime());
+		render();
+        //render2();// render the graphics output to screen
+		g_timer.waitUntil(frameTime);		 // Frame rate limiter. Limits each frame to a specified time in ms.      
+>>>>>>> Stashed changes
 	}
 	highscore();
 	gg();
+    //gg2();
 }
