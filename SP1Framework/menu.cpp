@@ -17,9 +17,9 @@ void mainmenu()
 
         while(true)
         {
-            system("cls");
+			system("cls");
 
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+            colour(0x02);
             cout <<     "                       ******************************************************" << endl;
             cout <<     "                       *   ______                       __                  *" << endl;
             cout <<     "                       *  /      \\                     |  \\                 *" << endl;
@@ -38,12 +38,12 @@ void mainmenu()
             {
                 if (i == choice)
                 {
-                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+                    colour(0x03);
                     cout << "						" << Menu[i] << endl;
                 }
                 else
                 {
-                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+                    colour(0x02);
                     cout << "						" << Menu[i] << endl;
                 }
             }
@@ -82,8 +82,8 @@ void mainmenu()
                     case 1:
                         {
                             instruction();
-                            Sleep (200);
-                        } break;
+							Sleep (200);
+						} break;
                     case 2:
                         {
                             highscore();
@@ -91,7 +91,7 @@ void mainmenu()
                         } break;
                     case 3:
                         {
-                            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+                            colour(0x02);
                             quitGame();
                             g_quitGame = true;
                         } break;
@@ -117,7 +117,11 @@ void instruction()
     cout << "                   Eat more food produced randomly in the map to progress further."<< endl;
     cout << "                       The game gets more challenging as the snake gets longer."<< endl; 
     cout << "             However,the snake will die if it touches its own body or touches the walls."<< endl << endl;
+<<<<<<< HEAD
     cout << "                       Press UP or Down arrow keys to return to the main menu!" << endl;
+=======
+    cout << "                            Press UP arrow key to return to the main menu!" << endl;
+>>>>>>> origin/master
 }
 
 void quitGame()
@@ -143,27 +147,4 @@ void quitGame()
     g_quitGame = true;
     exit(0);
 
-}
-
-void gameLoop()
-{
-    bool check = true;
-
-    int choice = 0;
-    while(check)
-    {
-        switch (choice)
-        {
-        case GAME: game();
-            break;
-        case INSTRUCTION: instruction();
-            break;
-        case HIGHSCORE: highscore();
-            break;
-        case EXIT: quitGame();
-            break;
-        default: mainmenu();
-            break;
-        }
-    }
 }

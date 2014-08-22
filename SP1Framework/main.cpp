@@ -19,7 +19,7 @@ int main()
 	init();				// initialize your variables
 	while (!g_quitGame) // run this loop until user wants to quit 
 	{
-		gameLoop(); // runs the menu screen
+		mainmenu(); // runs the menu screen
 	}
 	shutdown(); // do clean up, if any. free memory.
 
@@ -31,7 +31,6 @@ int main()
 void game()
 {
 	createsnake(3);
-	gameover = false;
 	cls();
 	map();
 	g_timer.startTimer();	// Start timer to calculate how long it takes to render this frame
@@ -42,6 +41,6 @@ void game()
 		render();							 // render the graphics output to screen
 		g_timer.waitUntil(frameTime);		 // Frame rate limiter. Limits each frame to a specified time in ms.      
 	}
-	gg();
 	highscore();
+	gg();
 }
