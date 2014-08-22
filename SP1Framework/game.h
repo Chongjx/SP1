@@ -22,6 +22,14 @@ enum Keys
     K_COUNT
 };
 
+enum Colours
+{
+	LIGHT_BLUE = 1,
+	RED,
+	PINK,
+	YELLOW,
+};
+
 enum direction
 {
 	up = 1,
@@ -56,9 +64,11 @@ void mainmenu();					// Main menu screen
 void instruction();				// Into the instruction for user
 void game();					// Into the game
 void highscore();				// Into the highscore
+void options();
 void quitGame();				// Quit the game
 void createsnake(int size);		// Create my snake at the intial location
 int updatesnake();
 void gg();
+void colourOptions();
 
 #endif // _GAME_H
