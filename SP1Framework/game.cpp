@@ -216,7 +216,7 @@ void render()
 
 	// render the snake
 	gotoXY(body[0].charLocation);
-	cout << 'O';
+	cout << char(254);
 
 	gotoXY(12, 40);
 	cout << score;
@@ -236,15 +236,27 @@ void map()
 	{
 		for (int col = 0; col < Width; col++)
 		{
-			if ( col == 0 || row == 0 || col == Width - 1 || row == Height - 1)
+			if (col == 0 && (row != 0 && row != Height - 1))
 			{
-				level[row][col] = '*';
+				level[row][col] = char(221);
 			}
 
-			else
+			else if (row == 0)
 			{
-				level[row][col] = ' ';
+				level[row][col] = char(220);
 			}
+
+			else if (col == Width - 1 && (row != 0 && row != Height - 1))
+			{
+				level[row][col] = char(222);
+			}
+
+			else if (row == Height - 1)
+			{
+				level[row][col] = char(223);
+			}
+
+
 		}
 	}
 
@@ -292,7 +304,7 @@ void spawn()
 
 	gotoXY (apple);
 	colour(0x1);
-	cout << '@';
+	cout << char(3);
 }
 
 int updatesnake()
@@ -301,7 +313,7 @@ int updatesnake()
 
 	if (body[0].charLocation.X == apple.X && body[0].charLocation.Y == apple.Y)
 	{
-		Beep (523, 100);
+		Beep (1046, 100);
 		foodeaten = true;
 		foodspawned = 0;
 		body.push_back(snake());
@@ -338,7 +350,7 @@ void checkcollision()
 
 void highscore()
 {
-    colour(0x02);
+	colour(0x02);
 	cls();
 	cout <<	   "                         _   _ ___ ____ _   _ ____   ____ ___  ____  _____ " << endl;
 	cout <<    "                        | | | |_ _/ ___| | | / ___| / ___/ _ \\|  _ \\| ____|" << endl;
