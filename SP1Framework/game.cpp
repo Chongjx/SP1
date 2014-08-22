@@ -366,6 +366,18 @@ void highscore()
 
 void gg()
 {
+	Beep (296,300);Sleep(300);
+	Beep (264,300);Sleep(300);
+	Beep (420,300);Sleep(100);
+	Beep (446,100);Sleep(300);
+	Beep (433,200);
+	Beep (420,100);Sleep(200);
+	Beep (496,100);Sleep(300);
+	Beep (530,100);Sleep(150);
+	Beep (592,100);Sleep(150);
+	Beep (640,100);Sleep(300);
+	Beep (549,100);Sleep(100);
+	Beep (592,100);Sleep(300);
 	move = 5;
 	prev = 0;
 	body.erase(body.begin(), body.begin()+body.size());
