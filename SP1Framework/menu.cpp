@@ -117,11 +117,8 @@ void instruction()
     cout << "                   Eat more food produced randomly in the map to progress further."<< endl;
     cout << "                       The game gets more challenging as the snake gets longer."<< endl; 
     cout << "             However,the snake will die if it touches its own body or touches the walls."<< endl << endl;
-<<<<<<< HEAD
-    cout << "                       Press UP or Down arrow keys to return to the main menu!" << endl;
-=======
     cout << "                            Press UP arrow key to return to the main menu!" << endl;
->>>>>>> origin/master
+
 }
 
 void quitGame()
